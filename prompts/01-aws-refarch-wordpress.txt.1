@@ -1,0 +1,180 @@
+You are an AI assistant tasked with generating a Terraform configuration file for a WordPress architecture on AWS. Your goal is to create a comprehensive, production-ready Terraform configuration that encompasses all necessary resources for a scalable WordPress architecture.
+
+Here are the configuration details for the WordPress architecture:
+<configuration_details>
+1. VPC Configuration
+   Purpose:
+      Define a virtual private cloud (VPC) to host resources.
+      Segregate networks into public and private subnets.
+   Key Components:
+      VPC:
+         - CIDR block: Defines the IP range, e.g., 10.0.0.0/16.
+         - Tags for identification: Name=WordPressVPC.
+      Subnets:
+         - Public subnets: Enable access to the internet; associated with an internet gateway.
+         - Private subnets: Isolated for backend services.
+         - CIDR blocks, availability zones, and routing tables must be specified.
+      Internet Gateway:
+         - Attached to the VPC for external communication.
+      Route Tables:
+         - Public route table: Includes a route to the internet gateway.
+         - Private route table: Does not allow direct internet access; optional NAT gateway configuration.
+
+2. Security Groups
+   Purpose:
+      Control inbound and outbound traffic to resources.
+   Key Components:
+      Web Server Security Group:
+         - Allow inbound HTTP (port 80) and HTTPS (port 443) from 0.0.0.0/0.
+         - Allow inbound SSH (port 22) from specific IPs (administrative access).
+         - Outbound access to all ports/destinations (default).
+      Database Security Group:
+         - Allow inbound MySQL/Aurora (port 3306) from the web server's security group.
+         - Outbound access to the web server's security group (optional).
+
+3. Bastion Host Configuration
+   Purpose:
+      Secure administrative access to private resources.
+   Key Components:
+      EC2 Instance:
+         - AMI: Specify an Amazon Linux or Ubuntu image.
+         - Instance type: t2.micro or as required.
+         - Security group: Allow SSH from specific IP ranges.
+      Key Pair:
+         - SSH key for secure access.
+      Elastic IP:
+         - Associate with the bastion host for consistent administrative access.
+
+4. EFS Configuration with Alarms
+   Purpose:
+      Shared file storage for WordPress instances.
+   Key Components:
+      EFS File System:
+         - Lifecycle policies: Transition to infrequent access.
+         - Performance mode: General purpose or provisioned throughput.
+      Mount Targets:
+         - One in each subnet.
+      CloudWatch Alarms:
+         - Monitor throughput, burst credit balance, and error rates.
+
+5. Elasticache Configuration
+   Purpose:
+      Improve application performance with caching.
+   Key Components:
+      Cluster Configuration:
+         - Engine: Memcached or Redis.
+         - Node types: E.g., cache.t2.micro.
+         - Number of nodes.
+      Subnet Group:
+         - Specify private subnets.
+      Security:
+         - Allow connections from WordPress instances.
+
+6. Public ALB Configuration
+   Purpose:
+      Distribute traffic across WordPress instances.
+   Key Components:
+      Load Balancer:
+         - Type: Application.
+         - Listeners: HTTP (port 80) and HTTPS (port 443).
+         - Security groups: Allow inbound HTTP/HTTPS.
+      Target Groups:
+         - Protocol: HTTP.
+         - Health check settings: Path, intervals, and thresholds.
+
+7. RDS Configuration
+   Purpose:
+      Managed relational database for WordPress.
+   Key Components:
+      Database Instance:
+         - Engine: MySQL or Aurora.
+         - Instance class: db.t2.small or as required.
+         - Multi-AZ deployment for high availability.
+      Security Group:
+         - Allow connections from WordPress application security group.
+      Parameter Groups:
+         - Adjust DB configurations (e.g., character set, timeouts).
+
+8. CloudFront Configuration
+   Purpose:
+      Content delivery and caching for performance.
+   Key Components:
+      Distribution:
+         - Origin: S3 bucket or ALB.
+         - Behaviors: Cache WordPress assets.
+         - Security: SSL certificates.
+      Cache Settings:
+         - Optimize cache for WordPress assets like images, CSS, and JS.
+
+9. Route 53 Configuration
+   Purpose:
+      Manage DNS records for WordPress.
+   Key Components:
+      Hosted Zone:
+         - Public or private based on domain setup.
+      Records:
+         - A/AAAA for ALB.
+         - CNAME for CloudFront.
+
+10. Monitoring and Dashboards
+    Purpose:
+       Track the health and performance of the WordPress architecture.
+    Key Components:
+       CloudWatch Dashboards:
+          - Visualize EFS, RDS, and EC2 performance.
+       Metrics:
+          - CPU, memory, and network for EC2.
+          - Database connections and read/write latency for RDS.
+
+11. Master Files
+    Purpose:
+       Centralize configurations for consistency.
+    Key Components:
+       Parameters and Mappings:
+          - Define reusable variables like AMI IDs and instance types.
+       Resource Stacks:
+          - Nested stacks for modular design.
+
+12. Web Server Configuration
+    Purpose:
+       Launch and configure WordPress instances.
+    Key Components:
+       EC2 Instances:
+          - Auto Scaling Group: Min/max instances for scaling.
+          - Instance profile: IAM role for accessing S3 and EFS.
+       Launch Configurations:
+          - User data: WordPress installation scripts.
+
+
+</configuration_details>
+
+Your Terraform configuration should include, but is not limited to, the following components:
+<required_components>
+- Provider configuration for AWS
+- VPC and networking resources (subnets, route tables, internet gateway)
+- Security groups for EC2 instances, RDS, and ELB
+- EC2 instances for WordPress
+- RDS instance for the WordPress database
+- Elastic Load Balancer
+- Auto Scaling Group for EC2 instances
+- CloudFront distribution for content delivery
+- S3 bucket for static assets
+- Route 53 DNS configuration
+</required_components>
+
+Follow these instructions to create the Terraform configuration:
+
+1. Start the file with the required Terraform and provider blocks.
+2. Organize the resources logically, grouping related resources together (e.g., networking, compute, storage, etc.).
+3. Use variables for values that might change or need to be customized.
+4. Implement proper naming conventions and tags for all resources.
+5. Set up CloudWatch logs and alarms for monitoring and alerting.
+6. Use Terraform data sources when referencing existing resources.
+7. Implement proper error handling and retry mechanisms where necessary.
+8. Add outputs for important resource information (e.g., API Gateway URL, Lambda function ARNs).
+
+Ensure that your configuration follows AWS best practices for WordPress architecture and considers scalability and cost-efficiency.
+
+Your output should be the complete contents of a single .tf file. Do not include any additional explanations or comments outside of the Terraform code. Use HashiCorp Configuration Language (HCL) syntax and include appropriate in-line comments to explain complex configurations or design decisions.
+
+Begin your response with the opening tag <terraform_configuration> and end it with the closing tag </terraform_configuration>. The entire Terraform code should be contained within these tags.

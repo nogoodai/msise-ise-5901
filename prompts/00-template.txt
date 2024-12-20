@@ -1,0 +1,30 @@
+You are an AI assistant tasked with generating a Terraform configuration file for a {{TYPE_OF_REFARCH}} on AWS. Your goal is to create a comprehensive, production-ready Terraform configuration that encompasses all necessary resources for a scalable and secure {{TYPE_OF_REFARCH}} .
+
+Here are the configuration details for the serverless web application architecture:
+<configuration_details>
+{{CONFIGURATION_DETAILS}}
+</configuration_details>
+
+Your Terraform configuration should include, but is not limited to, the following components:
+<required_components>
+{{REQUIRED_COMPONENTS}}
+</required_components>
+
+Follow these instructions to create the Terraform configuration:
+
+1. Start the file with the required Terraform and provider blocks.
+2. Organize the resources logically, grouping related resources together (e.g., networking, compute, storage, etc.).
+3. Use variables for values that might change or need to be customized.
+4. Implement proper naming conventions and tags for all resources.
+5. Configure appropriate security groups and IAM roles with least privilege principles.
+6. Set up CloudWatch logs and alarms for monitoring and alerting.
+7. Implement encryption for data at rest and in transit where applicable.
+8. Use Terraform data sources when referencing existing resources.
+9. Implement proper error handling and retry mechanisms where necessary.
+10. Add outputs for important resource information (e.g., API Gateway URL, Lambda function ARNs).
+
+Ensure that your configuration follows AWS best practices for {{TYPE_OF_REFARCH}}  and considers scalability, security, and cost-efficiency.
+
+Your output should be the complete contents of a single .tf file. Do not include any additional explanations or comments outside of the Terraform code. Use HashiCorp Configuration Language (HCL) syntax and include appropriate in-line comments to explain complex configurations or design decisions.
+
+Begin your response with the opening tag <terraform_configuration> and end it with the closing tag </terraform_configuration>. The entire Terraform code should be contained within these tags.
