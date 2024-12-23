@@ -2,6 +2,9 @@ import subprocess
 import sys
 import os
 import shutil
+import csv
+import json
+
 
 def clean_input_file(input_file):
     """Remove lines containing 'terraform_configuration' or three backticks from the input file."""
@@ -11,6 +14,7 @@ def clean_input_file(input_file):
         for line in lines:
             if "terraform_configuration" not in line and "```" not in line:
                 file.write(line)
+
 
 def run_kics_scanner(input_file, queries_path):
     # Check if the input file exists
@@ -33,8 +37,10 @@ def run_kics_scanner(input_file, queries_path):
     # Run the kics command line scanner tool
     try:
         result = subprocess.run(
-            ['kics', 'scan', '-p', input_file, '-q', queries_path, '-o', output_file],
-            check=True, capture_output=True, text=True
+            ["kics", "scan", "-p", input_file, "-q", queries_path, "-o", output_file],
+            check=True,
+            capture_output=True,
+            text=True,
         )
     except subprocess.CalledProcessError as e:
         if 2 <= e.returncode <= 125:
@@ -48,16 +54,33 @@ def run_kics_scanner(input_file, queries_path):
     severity_counters = subprocess.run(
         jq_command, shell=True, capture_output=True, text=True
     )
-    with open(results_file, "w") as f:
-        f.write(severity_counters.stdout)
-    print(f"Severity counters saved to {results_file}")
 
+    # Write severity_counters as CSV to results_file
+    severity_counters_json = json.loads(severity_counters.stdout)
+    with open(results_file, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(severity_counters_json.values())
+    print(f"Severity counters saved to {results_file}")
+    # Re-read the results file and add a comma and the length of the input file to the rows
+    with open(results_file, "r") as csvfile:
+        reader = csv.reader(csvfile)
+        rows = list(reader)
+
+    input_file_length = sum(1 for line in open(input_file))
+
+    with open(results_file, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        for row in rows:
+            row.append(input_file_length)
+            writer.writerow(row)
+    print(f"Updated {results_file} with the length of the input file")
     # Delete the results.json file and the output directory
     if os.path.isfile(output_file):
         os.remove(output_file)
     if os.path.isdir(output_file):
         shutil.rmtree(output_file)
     print(f"Deleted {output_file} and its directory")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
