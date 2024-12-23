@@ -61,17 +61,23 @@ def run_kics_scanner(input_file, queries_path):
         writer = csv.writer(csvfile)
         writer.writerow(severity_counters_json.values())
     print(f"Severity counters saved to {results_file}")
+
     # Re-read the results file and add a comma and the length of the input file to the rows
     with open(results_file, "r") as csvfile:
         reader = csv.reader(csvfile)
         rows = list(reader)
+     
+    with open(input_file, "r") as file:
+        logical_lines_of_code = 0
+        for line in file:
+            if line.strip() and not line.strip().startswith("#"):
+                logical_lines_of_code += 1
 
-    input_file_length = sum(1 for line in open(input_file))
-
+    
     with open(results_file, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         for row in rows:
-            row.append(input_file_length)
+            row.append(logical_lines_of_code)
             writer.writerow(row)
     print(f"Updated {results_file} with the length of the input file")
     # Delete the results.json file and the output directory
