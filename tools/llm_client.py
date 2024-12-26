@@ -20,14 +20,14 @@ def ask_from_file(model, temperature, system_prompt_file, user_prompt_file):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ]
-        
+
         # Call the AI model to get a response
         response = client.chat.completions.create(
             model=model,
             messages=messages,
             temperature=temperature,
         )
-        
+
         # Return the response content
         return response.choices[0].message.content.strip()
     except Exception as e:
@@ -79,7 +79,7 @@ if __name__ == "__main__":
             )
 
             if result:
-                # Generate the output filename and write the response to the file
+                # Generate the output filename and save the response
                 output_filename = generate_output_filename(model, output_log_dir)
                 with open(output_filename, "w") as f:
                     f.write(result)

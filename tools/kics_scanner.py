@@ -7,7 +7,8 @@ import json
 
 
 def clean_input_file(input_file):
-    """Remove lines containing 'terraform_configuration' or three backticks from the input file."""
+    """Remove lines containing 'terraform_configuration' or three backticks
+    from the input file."""
     with open(input_file, "r") as file:
         lines = file.readlines()
     with open(input_file, "w") as file:
@@ -44,7 +45,9 @@ def run_kics_scanner(input_file, queries_path):
         )
     except subprocess.CalledProcessError as e:
         if 2 <= e.returncode <= 125:
-            print(f"KICS scan completed successfully. Results saved to {output_file}")
+            print(
+                f"KICS scan completed successfully. " f"Results saved to {output_file}"
+            )
         else:
             print(f"Error running KICS scan: {e.stderr}")
 
@@ -62,18 +65,17 @@ def run_kics_scanner(input_file, queries_path):
         writer.writerow(severity_counters_json.values())
     print(f"Severity counters saved to {results_file}")
 
-    # Re-read the results file and add a comma and the length of the input file to the rows
+    # Re-read the results file and add a comma and the length of the input file
     with open(results_file, "r") as csvfile:
         reader = csv.reader(csvfile)
         rows = list(reader)
-     
+
     with open(input_file, "r") as file:
         logical_lines_of_code = 0
         for line in file:
             if line.strip() and not line.strip().startswith("#"):
                 logical_lines_of_code += 1
 
-    
     with open(results_file, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         for row in rows:
@@ -90,7 +92,7 @@ def run_kics_scanner(input_file, queries_path):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python kics_scanner.py <input_terraform_file> <queries_path>")
+        print("Usage: python kics_scanner.py " "<input_terraform_file> <queries_path>")
     else:
         input_file = sys.argv[1]
         queries_path = sys.argv[2]
