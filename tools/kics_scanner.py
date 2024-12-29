@@ -38,16 +38,22 @@ def run_kics_scanner(input_file, queries_path):
     # Run the kics command line scanner tool
     try:
         result = subprocess.run(
-            ["kics", "scan", "-p", input_file, "-q", queries_path, "-o", output_file],
+            ["kics",
+             "scan",
+             "-p",
+             input_file,
+             "-q",
+             queries_path,
+             "-o",
+             output_file],
             check=True,
             capture_output=True,
             text=True,
         )
     except subprocess.CalledProcessError as e:
         if 2 <= e.returncode <= 125:
-            print(
-                f"KICS scan completed successfully. " f"Results saved to {output_file}"
-            )
+            print(f"KICS scan completed successfully. "
+                  f"Results saved to {output_file}")
         else:
             print(f"Error running KICS scan: {e.stderr}")
 
@@ -92,7 +98,7 @@ def run_kics_scanner(input_file, queries_path):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python kics_scanner.py " "<input_terraform_file> <queries_path>")
+        print("Usage: python kics_scanner.py <input_terraform_file> <queries_path>")
     else:
         input_file = sys.argv[1]
         queries_path = sys.argv[2]
