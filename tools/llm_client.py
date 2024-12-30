@@ -5,6 +5,14 @@ import datetime
 
 client = ai.Client()
 
+client.configure({
+    "ollama": {
+        "timeout": 6000,  # Set timeout to 600 seconds (10 minutes)
+    },
+    "xai": {
+        "timeout": 600,  # Set timeout to 600 seconds (10 minutes)
+    }
+})
 
 def ask_from_file(model, temperature, system_prompt_file, user_prompt_file):
     """
@@ -43,7 +51,7 @@ def generate_output_filename(model, output_dir):
     # Generate a timestamp
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # Create the output filename
-    return os.path.join(output_dir, f"{model_name}_response_{timestamp}.txt")
+    return os.path.join(output_dir, f"{model_name}_response_{timestamp}.tf")
 
 
 if __name__ == "__main__":
