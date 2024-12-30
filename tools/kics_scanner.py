@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import subprocess
 import sys
 import os
@@ -98,7 +100,7 @@ def run_kics_scanner(input_file, queries_path):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python kics_scanner.py <input_terraform_file> <queries_path>")
+        print("Usage:kics_scanner.py <input_terraform_file> <queries_path>")
     else:
         input_file = sys.argv[1]
         queries_path = sys.argv[2]

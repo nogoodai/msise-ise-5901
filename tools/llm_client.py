@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import aisuite as ai
 import sys
 import os
@@ -58,7 +60,7 @@ if __name__ == "__main__":
     # Check if the correct number of arguments are provided
     if len(sys.argv) != 6:
         print(
-            "Usage: python llm_client.py <system_prompt_file> "
+            "Usage: llm_client.py <system_prompt_file> "
             "<user_prompt_file> <output_log_dir> <num_calls> <model>"
         )
         sys.exit(1)
