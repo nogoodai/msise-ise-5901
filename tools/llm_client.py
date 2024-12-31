@@ -58,10 +58,10 @@ def generate_output_filename(model, output_dir):
 
 if __name__ == "__main__":
     # Check if the correct number of arguments are provided
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         print(
             "Usage: llm_client.py <system_prompt_file> "
-            "<user_prompt_file> <output_log_dir> <num_calls> <model>"
+            "<user_prompt_file> <output_log_dir> <num_calls> <model> <temperature>"
         )
         sys.exit(1)
 
@@ -71,6 +71,7 @@ if __name__ == "__main__":
     output_log_dir = sys.argv[3]
     num_calls = int(sys.argv[4])
     model = sys.argv[5]
+    temperature = float(sys.argv[6])
 
     # Ensure the output directory exists
     os.makedirs(output_log_dir, exist_ok=True)
@@ -83,7 +84,7 @@ if __name__ == "__main__":
             # Get the response from the AI model
             result = ask_from_file(
                 model=model,
-                temperature=0.7,
+                temperature=temperature,
                 system_prompt_file=system_prompt_file,
                 user_prompt_file=user_prompt_file,
             )
