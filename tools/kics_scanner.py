@@ -90,13 +90,6 @@ def run_kics_scanner(input_file, queries_path):
             row.append(logical_lines_of_code)
             writer.writerow(row)
     print(f"Updated {results_file} with the length of the input file")
-    # Delete the results.json file and the output directory
-    if os.path.isfile(output_file):
-        os.remove(output_file)
-    if os.path.isdir(output_file):
-        shutil.rmtree(output_file)
-    print(f"Deleted {output_file} and its directory")
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
