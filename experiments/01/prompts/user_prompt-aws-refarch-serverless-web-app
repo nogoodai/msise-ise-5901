@@ -1,0 +1,104 @@
+Here are the configuration details for a serverless web application architecture:
+<configuration_details>
+1. Authentication with Amazon Cognito
+   Purpose: 
+      Manage user authentication and authorization.
+   Key Components:
+      Cognito User Pool:
+         - Email as the username attribute.
+         - Auto-verification for email enabled.
+      Password policies:
+         - Minimum length: 6
+         - Require uppercase: true
+         - Require lowercase: true
+         - Require symbols and numbers: false
+      Cognito User Pool Client:
+         - OAuth2 flows: authorization_code, implicit.
+         - Scopes: email, phone, openid.
+         - No client secret generated.
+      Cognito Domain:
+         - Custom domain using application and stack names.
+
+2. Database with DynamoDB
+   Purpose:
+      Store and manage application data.
+   Key Components:
+      DynamoDB Table:
+         - Table name: todo-table-{stack-name}.
+         - Partition key: cognito-username (String).
+         - Sort key: id (String).
+         - Server-side encryption enabled.
+         - Provisioned throughput: 5 read and 5 write capacity units.
+
+3. API Gateway
+   Purpose:
+      Serve as the entry point for all API requests.
+   Key Components:
+      API Definition:
+      - Logging and metrics enabled.
+      - CORS support for all HTTP methods (GET, POST, PUT, DELETE, etc.).
+      - Cognito User Pool Authorizer attached.
+      Stages and Usage Plans:
+         Stage: prod
+         Usage plan:
+            - Daily quota: 5000 requests.
+            - Burst limit: 100 requests.
+            - Rate limit: 50 requests per second.
+4. Lambda Functions
+   Purpose:
+      Execute application logic for CRUD operations on to-do items.
+   Key Components:
+      General Configuration:
+         - Runtime: Node.js 12.x.
+         - Memory: 1024 MB.
+         - Timeout: 60 seconds.
+         - AWS X-Ray tracing enabled.
+      Functions:
+         - Add Item: POST /item.
+         - Get Item: GET /item/{id}.
+         - Get All Items: GET /item.
+         - Update Item: PUT /item/{id}.
+         - Complete Item: POST /item/{id}/done.
+         - Delete Item: DELETE /item/{id}.
+      Policies:
+         - DynamoDB CRUD policies for write operations.
+         - DynamoDB read-only policies for read operations.
+         - CloudWatch metrics publishing permissions.
+
+5. Amplify for Frontend Hosting
+      Purpose:
+         - Host and manage the frontend application.
+      Key Components:
+         Amplify App:
+         - Source: GitHub repository.
+         - Build spec: Install dependencies, build project, and deploy artifacts.
+         Amplify Branch:
+         - Branch name: master.
+         - Auto-builds enabled.
+
+6. IAM Roles and Policies
+      Purpose:
+         - Provide necessary permissions for components to interact securely.
+      Key Components:
+         API Gateway Role:
+            - Grant API Gateway permissions to write logs to CloudWatch.
+         Amplify Role:
+            - Grant Amplify permissions to manage Amplify resources.
+
+</configuration_details>
+
+Your Terraform configuration should include, but is not limited to, the following components:
+<required_components>
+- Provider configuration for AWS
+- Cognito User Pool for authentication and user management
+- Cognito User Pool Client for OAuth2 flows and authentication scopes
+- Custom domain for Cognito User Pool
+- DynamoDB table for data storage with partition and sort keys
+- API Gateway for serving API requests and integrating with Cognito for authorization
+- Lambda functions for CRUD operations on DynamoDB
+- Amplify app for frontend hosting and deployment from GitHub
+- IAM roles and policies for: 
+    API Gateway to log to CloudWatch
+    Amplify to manage resources
+    Lambda to interact with DynamoDB and publish metrics to CloudWatch
+</required_components>
