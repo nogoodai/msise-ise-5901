@@ -1,0 +1,528 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 388,
+	"files_parsed": 1,
+	"lines_parsed": 388,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 1,
+		"INFO": 4,
+		"LOW": 6,
+		"MEDIUM": 8,
+		"TRACE": 0
+	},
+	"total_counter": 19,
+	"total_bom_resources": 0,
+	"start": "2025-01-05T22:40:36.556636726-06:00",
+	"end": "2025-01-05T22:40:47.684731383-06:00",
+	"paths": [
+		"gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "Passwords And Secrets - Generic Token",
+			"query_id": "baee238e-1921-4801-9c3f-79ae1d7b2cbc",
+			"query_url": "https://docs.kics.io/latest/secrets/",
+			"severity": "HIGH",
+			"platform": "Common",
+			"cwe": "798",
+			"cloud_provider": "COMMON",
+			"category": "Secret Management",
+			"experimental": false,
+			"description": "Query to find passwords and secrets in infrastructure code.",
+			"description_id": "d69d8a89",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "1a71a0a38f3d35a0fa813d17242cbdd9592307bea3b562fe3f19250ecea54a79",
+					"line": 203,
+					"issue_type": "RedundantAttribute",
+					"search_key": "",
+					"search_line": 0,
+					"search_value": "",
+					"expected_value": "Hardcoded secret key should not appear in source",
+					"actual_value": "Hardcoded secret key appears in source"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "5d97984615e3a90003594e55788c6c75d8038bd68d00d61078e0c00f8c4662b3",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[prod]'s corresponding aws_api_gateway_method_settings should be defined and not null",
+					"actual_value": "aws_api_gateway_stage[prod]'s corresponding aws_api_gateway_method_settings isn't defined or is null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "5d97984615e3a90003594e55788c6c75d8038bd68d00d61078e0c00f8c4662b3",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'access_log_settings' should be defined",
+					"actual_value": "'access_log_settings' is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "1041d0bad220be71ad121f8aece8368c74ca1343c10ae3db745c4452a75ef3d6",
+					"line": 168,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "main",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[main] has a 'aws_api_gateway_stage' resource associated with 'access_log_settings' set",
+					"actual_value": "aws_api_gateway_deployment[main] doesn't have a 'aws_api_gateway_stage' resource associated with 'access_log_settings' set"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Endpoint Config is Not Private",
+			"query_id": "6b2739db-9c49-4db7-b980-7816e0c248c1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "The API Endpoint type in API Gateway should be set to PRIVATE so it's not exposed to the public internet",
+			"description_id": "baf9a6d6",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "572955970c2de9721655543c03db5f28796984a33cdffc2be92954ed031858fe",
+					"line": 100,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "api",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_rest_api[api].endpoint_configuration.types[%!s(int=0)]",
+					"search_line": 100,
+					"search_value": "",
+					"expected_value": "'aws_api_gateway_rest_api.aws_api_gateway_rest_api.types' should be 'PRIVATE'.",
+					"actual_value": "'aws_api_gateway_rest_api.aws_api_gateway_rest_api.types' is not 'PRIVATE'.",
+					"remediation": "{\"after\":\"PRIVATE\",\"before\":\"REGIONAL\"}",
+					"remediation_type": "replacement"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Method Does Not Contains An API Key",
+			"query_id": "671211c5-5d2a-4e97-8867-30fc28b02216",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "An API Key should be required on a method request.",
+			"description_id": "f133fed2",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "e9061de95b44f79e731f0614d7f3c00bd92d948b8da9a8cb584cdbb4062118d4",
+					"line": 116,
+					"resource_type": "aws_api_gateway_method",
+					"resource_name": "post_item",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_api_gateway_method[post_item]",
+					"search_line": 116,
+					"search_value": "",
+					"expected_value": "resource.aws_api_gateway_method[post_item].api_key_required should be defined",
+					"actual_value": "resource.aws_api_gateway_method[post_item].api_key_required is undefined",
+					"remediation": "api_key_required = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With CloudWatch Logging Disabled",
+			"query_id": "982aa526-6970-4c59-8b9b-2ce7e019fe36",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#managing-the-api-logging-cloudwatch-log-group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Logs for APIs should be enabled and using the naming convention described in documentation",
+			"description_id": "48b9d186",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "8d853411ac1271315d054ae334f28abeb518574285fa25aaf136fa2155353f2d",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_cloudwatch_log_group' should be defined and use the correct naming convention",
+					"actual_value": "'aws_cloudwatch_log_group' for the stage is not undefined or not using the correct naming convention"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Without SSL Certificate",
+			"query_id": "0b4869fc-a842-4597-aa00-1294df425440",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#client_certificate_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "295",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "SSL Client Certificate should be enabled",
+			"description_id": "6d4941dc",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "0ec8adf89de4c9b6f1ad113ccb528e1681c27d2775c4ae586c6e397c3cc1e6e5",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'client_certificate_id' should be set",
+					"actual_value": "Attribute 'client_certificate_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway without WAF",
+			"query_id": "a186e82c-1078-4a7b-85d8-579561fde884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association#resource_arn",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "API Gateway should have WAF (Web Application Firewall) enabled",
+			"description_id": "bfefa118",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "7f2cf8edb78686a8940076553b12fb665351f7abf5c08ea68aad4dc971050e39",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "API Gateway Stage should be associated with a Web Application Firewall",
+					"actual_value": "API Gateway Stage is not associated with a Web Application Firewall"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Stage Without API Gateway UsagePlan Associated",
+			"query_id": "c999cf62-0920-40f8-8dda-0caccd66ed7e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "API Gateway Stage should have API Gateway UsagePlan defined and associated.",
+			"description_id": "72d08d94",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "a08430d5c0c04d1c9de97b2d4b3aac6bb7d91698182a29dca8212fa0da866ddd",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[prod] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_stage[prod] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With Invalid Compression",
+			"query_id": "ed35928e-195c-4405-a252-98ccb664ab7b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "API Gateway should have valid compression, which means attribute 'minimum_compression_size' should be set and its value should be greater than -1 and smaller than 10485760.",
+			"description_id": "fc02b8db",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "ab772d084bf38686597886261109609bb72fc4c6d757f5566b445d00eee1f7cd",
+					"line": 96,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "my-serverless-app-api",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_rest_api[api]",
+					"search_line": 96,
+					"search_value": "",
+					"expected_value": "Attribute 'minimum_compression_size' should be set and have a value greater than -1 and smaller than 10485760",
+					"actual_value": "Attribute 'minimum_compression_size' is undefined",
+					"remediation": "minimum_compression_size = 0",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway X-Ray Disabled",
+			"query_id": "5813ef56-fa94-406a-b35d-977d4a56ff2b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#xray_tracing_enabled",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway should have X-Ray Tracing enabled",
+			"description_id": "21e236a0",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "1c04cc41f86017b3116021d4020a7f37c13e834a8bb8064596caa64c8e97946a",
+					"line": 156,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-serverless-app-api-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod].xray_tracing_enabled",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "'aws_api_gateway_stage[prod].xray_tracing_enabled' should be set",
+					"actual_value": "'aws_api_gateway_stage[prod].xray_tracing_enabled' is undefined",
+					"remediation": "xray_tracing_enabled = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 26,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-serverless-app-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 26,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Lambda Functions Without X-Ray Tracing",
+			"query_id": "8152e0cf-d2f0-47ad-96d5-d003a76eabd1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#tracing_config",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS Lambda functions should have TracingConfig enabled. For this, property 'tracing_Config.mode' should have the value 'Active'",
+			"description_id": "2f90e1e9",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "dea431ed285ba08924ac6f8e6a7d6a443ef6c4a0a94051201e470d91871388e6",
+					"line": 124,
+					"resource_type": "aws_lambda_function",
+					"resource_name": "my-serverless-app-add-item",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lambda_function[add_item]",
+					"search_line": 124,
+					"search_value": "",
+					"expected_value": "aws_lambda_function[add_item].tracing_config should be defined and not null",
+					"actual_value": "aws_lambda_function[add_item].tracing_config is undefined or null",
+					"remediation": "tracing_config {\n\t\tmode = Active\n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "DynamoDB Table Point In Time Recovery Disabled",
+			"query_id": "741f1291-47ac-4a85-a07b-3d32a9d6bd3e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table#point_in_time_recovery",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice to have point in time recovery enabled for DynamoDB Table",
+			"description_id": "205ac3d1",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "dc825003901275fa917a1aa1ef4a2afc4da14b2db95e2c68c29782d9ff9cc2de",
+					"line": 67,
+					"resource_type": "aws_dynamodb_table",
+					"resource_name": "aws_dynamodb_table",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_dynamodb_table[{{todo}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_dynamodb_table.point_in_time_recovery.enabled should be enabled",
+					"actual_value": "aws_dynamodb_table.point_in_time_recovery is missing",
+					"remediation": "point_in_time_recovery {\n\t\t enabled = true \n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Type",
+			"query_id": "fc5109bf-01fd-49fb-8bde-4492b543c34a",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid type.",
+			"description_id": "bba696eb",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "640a7d19957633262325eede374c4023394bbbab72bbd696ea92867d16679302",
+					"line": 12,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{aws_region}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "365aba732027f72785ffbe7bd91a57c57f313436e5c9b8b758d07288b3201208",
+					"line": 22,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{github_repo}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-13-33.tf",
+					"similarity_id": "7cf28fe87b32e8a8ec4a4caede84ef4c0269a1915132d07707af40716ab3ffb0",
+					"line": 17,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{stack_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				}
+			]
+		}
+	]
+}

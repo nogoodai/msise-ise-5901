@@ -1,0 +1,889 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 375,
+	"files_parsed": 1,
+	"lines_parsed": 364,
+	"lines_ignored": 11,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 6,
+		"INFO": 22,
+		"LOW": 1,
+		"MEDIUM": 11,
+		"TRACE": 0
+	},
+	"total_counter": 40,
+	"total_bom_resources": 0,
+	"start": "2025-01-05T21:54:45.975053241-06:00",
+	"end": "2025-01-05T21:54:57.074709387-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "DB Instance Storage Not Encrypted",
+			"query_id": "08bd0760-8752-44e1-9779-7bb369b2b4e4",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#storage_encrypted",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS DB Instance should have its storage encrypted by setting the parameter to 'true'. The storage_encrypted default value is 'false'.",
+			"description_id": "88ca11bc",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "b051c0f05829ae845fd09eca6f23c34b0bda3c125aa9a03af311ad97de7a524a",
+					"line": 187,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpress_db",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_db]",
+					"search_line": 187,
+					"search_value": "",
+					"expected_value": "'storage_encrypted' should be set to true",
+					"actual_value": "'storage_encrypted' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Passwords And Secrets - Generic Password",
+			"query_id": "487f4be7-3fd9-4506-a07a-eae252180c08",
+			"query_url": "https://docs.kics.io/latest/secrets/",
+			"severity": "HIGH",
+			"platform": "Common",
+			"cwe": "798",
+			"cloud_provider": "COMMON",
+			"category": "Secret Management",
+			"experimental": false,
+			"description": "Query to find passwords and secrets in infrastructure code.",
+			"description_id": "d69d8a89",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "1ebbc8d3fe0d4023513bc65a27ce6ad0e5ea9a80c8a7064e62e329ec81513fb2",
+					"line": 195,
+					"issue_type": "RedundantAttribute",
+					"search_key": "",
+					"search_line": 0,
+					"search_value": "",
+					"expected_value": "Hardcoded secret key should not appear in source",
+					"actual_value": "Hardcoded secret key appears in source"
+				}
+			]
+		},
+		{
+			"query_name": "Sensitive Port Is Exposed To Entire Network",
+			"query_id": "381c3f2a-ef6f-4eff-99f7-b169cda3422c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for the whole network in either TCP or UDP protocol",
+			"description_id": "5be78364",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "c668017ff3bb9803fba2d48c0b3f5ee07b0f8cc0bc5bbac75940d792a1a82724",
+					"line": 101,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web-sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,80",
+					"expected_value": "HTTP (TCP:80) should not be allowed",
+					"actual_value": "HTTP (TCP:80) is allowed"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "9cfb3582cd6c925e1ec244c3871f4a7ccefe6670aff5196efd207b89ccfc6c02",
+					"line": 101,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web-sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,443",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Unrestricted Security Group Ingress",
+			"query_id": "4728cd65-a20c-49da-8b31-9c08b423e4db",
+			"query_url": "https://www.terraform.io/docs/providers/aws/r/security_group.html",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "668",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Security groups allow ingress from 0.0.0.0:0 and/or ::/0",
+			"description_id": "ce3ee5e0",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "5fa9105468a45872936dbfcfed99004468d65231ac3082a80d3a4264d584ebed",
+					"line": 114,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web-sg]",
+					"search_line": 114,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "31623090aa268c80e945c8b1b969c8bdca6bdef97b712b9d2f9072f07a0df16d",
+					"line": 106,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web-sg]",
+					"search_line": 106,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Has Public IP",
+			"query_id": "5a2486aa-facf-477d-a5c1-b010789459ce",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "EC2 Instance should not have a public IP address.",
+			"description_id": "c6f1d1f4",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "0bd84b5c0af3f05b9734f60138e718a6cb2d17fc23e54556caf7fc559df1e4db",
+					"line": 156,
+					"resource_type": "aws_instance",
+					"resource_name": "web-server",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.web-server",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be defined and not null",
+					"actual_value": "'associate_public_ip_address' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Monitoring Disabled",
+			"query_id": "23b70e32-032e-4fa6-ba5c-82f56b9980e6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#monitoring",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "EC2 Instance should have detailed monitoring enabled. With detailed monitoring enabled data is available in 1-minute periods",
+			"description_id": "0d5413e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "2c4656980577866a0ec044d4c221f6da644afdc222f2dadbc8313b6a02bf2340",
+					"line": 156,
+					"resource_type": "aws_instance",
+					"resource_name": "web-server",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.{{web-server}}",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "'monitoring' should be defined and not null",
+					"actual_value": "'monitoring' is undefined or null",
+					"remediation": "monitoring = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "ELB Access Log Disabled",
+			"query_id": "20018359-6fd7-4d05-ab26-d4dffccbdf79",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#enabled",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "ELB should have logging enabled to help on error investigation",
+			"description_id": "c745bca6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "b4edf845c11c2a46f50c2fb62d831b5010e5485dd39583c4ebe8535c59b615fe",
+					"line": 221,
+					"resource_type": "aws_elb",
+					"resource_name": "wordpress-elb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_elb[{{wordpress_elb}}]",
+					"search_line": 221,
+					"search_value": "",
+					"expected_value": "'aws_elb[{{wordpress_elb}}].access_logs' should be defined and not null",
+					"actual_value": "'aws_elb[{{wordpress_elb}}].access_logs' is undefined or null",
+					"remediation": "access_logs {\n\t\tenabled = true\n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "HTTP Port Open To Internet",
+			"query_id": "ffac8a12-322e-42c1-b9b9-81ff85c39ef7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "319",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "The HTTP port is open to the internet in a Security Group",
+			"description_id": "a829609b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "cc12af5b3ce922834f5481878678d5ef163da7a34cb08b28ae52b3cdd769ea80",
+					"line": 96,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web-sg]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_security_group.ingress shouldn't open the HTTP port (80)",
+					"actual_value": "aws_security_group.ingress opens the HTTP port (80)"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Database Auth Not Enabled",
+			"query_id": "88fd05e0-ac0e-43d2-ba6d-fc0ba60ae1a6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iam_database_authentication_enabled",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "IAM Database Auth Enabled should be configured to true when using compatible engine and version",
+			"description_id": "12b1c8aa",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "e91e3e56f14cdc3b50e966d3b78d26e3e6d0693e695ec31c307e2f27e4f2965d",
+					"line": 187,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpress_db",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_db]",
+					"search_line": 187,
+					"search_value": "",
+					"expected_value": "'iam_database_authentication_enabled' should be set to true",
+					"actual_value": "'iam_database_authentication_enabled' is undefined or null",
+					"remediation": "iam_database_authentication_enabled = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "RDS With Backup Disabled",
+			"query_id": "1dc73fb4-5b51-430c-8c5f-25dcf9090b02",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "Make sure the AWS RDS configuration has automatic backup configured. If the retention period is equal to 0 there is no backup",
+			"description_id": "73fdfe55",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "0cf68dd8471fea91d30751208d56eaadd8cb5e1107cfb6af1cd0bafc0555d457",
+					"line": 187,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpress_db",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_db]",
+					"search_line": 187,
+					"search_value": "",
+					"expected_value": "'backup_retention_period' should be defined, and bigger than '0'",
+					"actual_value": "'backup_retention_period' is not defined",
+					"remediation": "backup_retention_period = 12",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "RDS Without Logging",
+			"query_id": "8d7f7b8c-6c7c-40f8-baa6-62006c6c7b56",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#enabled_cloudwatch_logs_exports",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "RDS does not have any kind of logger",
+			"description_id": "c499a58c",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "f407c42817de588be8a2db41dd997d576b45c971a2a21bfec702aa0b4bd7780a",
+					"line": 187,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpress_db",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_db]",
+					"search_line": 187,
+					"search_value": "",
+					"expected_value": "'enabled_cloudwatch_logs_exports' should be defined",
+					"actual_value": "'enabled_cloudwatch_logs_exports' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Logging Disabled",
+			"query_id": "f861041c-8c9f-4156-acfc-5e6e524f5884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Server Access Logging should be enabled on S3 Buckets so that all changes are logged and trackable",
+			"description_id": "fa5c7c72",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "d9ea4a1c9fd6f5724ddcd6d1ad47098ea43f91591e0dceef154c125f813e95cd",
+					"line": 325,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-static-assets-dev-${random_id.bucket_id.hex}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[static-assets]",
+					"search_line": 325,
+					"search_value": "",
+					"expected_value": "'logging' should be defined and not null",
+					"actual_value": "'logging' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Versioning",
+			"query_id": "568a4d22-3517-44a6-a7ad-6a7eed88722c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "S3 bucket should have versioning enabled",
+			"description_id": "7614ce3b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "4b9cac4f2f5fee76d339f2cb55133197dd8d7d6ee722c1033e8995f5f0071dda",
+					"line": 325,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-static-assets-dev-${random_id.bucket_id.hex}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[static-assets]",
+					"search_line": 325,
+					"search_value": "",
+					"expected_value": "'versioning' should be true",
+					"actual_value": "'versioning' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "efda4d5bdf1895bdaaf9d4da3ca472fb8f52d519e47012f29eba8aab6ed25e82",
+					"line": 30,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress-vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress-vpc]",
+					"search_line": 30,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress-vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress-vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "fb2b640b0e3e3437d328b9983ac1f65a141ad22968d28c23d9d932eb33fd9d3a",
+					"line": 30,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress-vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress-vpc]",
+					"search_line": 30,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress-vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress-vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 30,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Not EBS Optimized",
+			"query_id": "60224630-175a-472a-9e23-133827040766",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs_optimized",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for an EC2 instance to use an EBS optimized instance. This provides the best performance for your EBS volumes by minimizing contention between Amazon EBS I/O and other traffic from your instance",
+			"description_id": "ddce4bd9",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "e2a7b07f1f79e2ee647dc991cd3328e767108e6902964f3b71958ad21d92cadc",
+					"line": 156,
+					"resource_type": "aws_instance",
+					"resource_name": "web-server",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance[{{web-server}}]",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "'ebs_optimized' should be set to true",
+					"actual_value": "'ebs_optimized' is undefined or null",
+					"remediation": "ebs_optimized = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Name Is Not Snake Case",
+			"query_id": "1e434b25-8763-4b00-a5ca-ca03b7abbb66",
+			"query_url": "https://www.terraform.io/docs/extend/best-practices/naming.html#naming",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All names should follow snake case pattern.",
+			"description_id": "ac707cad",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "bd6b6bd484e5f9e13fa6606bf79ca69f5bd382d3bc997f5ef492e0c5e9a75d45",
+					"line": 50,
+					"resource_type": "aws_subnet",
+					"resource_name": "private-subnet-a",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_subnet.private-subnet-a",
+					"search_line": 50,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'private-subnet-a' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "1aaf2d738a4f693cd804ba11c00f8942874f9f23b7b55e955f83db994fb73d8a",
+					"line": 30,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress-vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_vpc.wordpress-vpc",
+					"search_line": 30,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'wordpress-vpc' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "2039da3ee8928acbdc0eae7819e0d5519a2648d1809b8b57d18a7859ab7c3cc4",
+					"line": 39,
+					"resource_type": "aws_subnet",
+					"resource_name": "public-subnet-a",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_subnet.public-subnet-a",
+					"search_line": 39,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'public-subnet-a' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "6d56ff6ac233e4ffad71674ae1ce0ff58f86949614d6117b8d6aa94fe403c456",
+					"line": 156,
+					"resource_type": "aws_instance",
+					"resource_name": "web-server",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_instance.web-server",
+					"search_line": 156,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'web-server' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "983c9ac9f5d1ba1c1b5f0ba893f0359ba90f7fc3702dd2c81ed3c6b8b9fec213",
+					"line": 133,
+					"resource_type": "aws_security_group",
+					"resource_name": "rds-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_security_group.rds-sg",
+					"search_line": 133,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'rds-sg' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "35d296537a7457d2cfeafc1b669dcce3e06ac98b3688aa9a937889df41a55fe3",
+					"line": 74,
+					"resource_type": "aws_route_table",
+					"resource_name": "public-route-table",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_route_table.public-route-table",
+					"search_line": 74,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'public-route-table' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "e03db6b4a77fb323c4ea5f8628242432781154f65a19469abb58b34d021f046e",
+					"line": 254,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "web-asg",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_autoscaling_group.web-asg",
+					"search_line": 254,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'web-asg' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "700ec90c3eabb1822f3d8c28e9562d056a73437febaf51eae3f875ed660b49ce",
+					"line": 300,
+					"resource_type": "aws_lb_target_group",
+					"resource_name": "web-tg",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_lb_target_group.web-tg",
+					"search_line": 300,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'web-tg' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "87b0fc49efc25bd250976597056b1f7c3307df0bdb8ed92ca4ca94eb9ade3b41",
+					"line": 325,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "static-assets",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_s3_bucket.static-assets",
+					"search_line": 325,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'static-assets' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "7448952a02e42707db4a2c535e943a2b6089d2927d3ecc0aa56d721d52d19de8",
+					"line": 96,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_security_group.web-sg",
+					"search_line": 96,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'web-sg' is not in snake case"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "d20f3c687a52a40a4dfc9ed999defc2402d7e02ed718196a568a7d7669d94400",
+					"line": 87,
+					"resource_type": "aws_route_table_association",
+					"resource_name": "public-subnet-association-a",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_route_table_association.public-subnet-association-a",
+					"search_line": 87,
+					"search_value": "",
+					"expected_value": "All names should be on snake case pattern",
+					"actual_value": "'public-subnet-association-a' is not in snake case"
+				}
+			]
+		},
+		{
+			"query_name": "Output Without Description",
+			"query_id": "59312e8a-a64e-41e7-a252-618533dd1ea8",
+			"query_url": "https://www.terraform.io/docs/language/values/outputs.html#description-output-value-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All outputs should contain a valid description.",
+			"description_id": "81535d16",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "e5e77a7cc630d9f761c598c7cffc63940ac8f683f0635aadf2cfea8738a097ce",
+					"line": 364,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{elb_dns_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "8ee45ca237810a6aef8e8f0d696fde39b459934130cdf6ae13405663cb8f7706",
+					"line": 369,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{s3_bucket_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "5504ba074175176b472aafffafbeb482dae99a7d58714066426c90563dd69982",
+					"line": 360,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{vpc_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "eb0d234ff96883467a78a2da6d3f9f6d5ed32dc7871e479ebef6f370fb5a3fbc",
+					"line": 300,
+					"resource_type": "aws_lb_target_group",
+					"resource_name": "web-tg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb_target_group[{{web-tg}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_lb_target_group[{{web-tg}}].tags should be defined and not null",
+					"actual_value": "aws_lb_target_group[{{web-tg}}].tags is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "5cffc2496a9ebfeed92247bb1482744ee2069af288c5f146559b54add42f0e62",
+					"line": 254,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "web-asg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_autoscaling_group[{{web-asg}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_autoscaling_group[{{web-asg}}].tags should be defined and not null",
+					"actual_value": "aws_autoscaling_group[{{web-asg}}].tags is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group Rule Without Description",
+			"query_id": "68eb4bf3-f9bf-463d-b5cf-e029bb446d2e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for all rules in AWS Security Group to have a description",
+			"description_id": "cee242dd",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "280b77865e850bef819d54897236a2ffeeb1e4fae976395c5f4e0364dc310532",
+					"line": 138,
+					"resource_type": "aws_security_group",
+					"resource_name": "rds-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{rds-sg}}].ingress",
+					"search_line": 138,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{rds-sg}}].ingress description should be defined and not null",
+					"actual_value": "aws_security_group[{{rds-sg}}].ingress description is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "75ce5cc9c1b96317998aeb388bcfc961ccdbdb43830b041d30645da1cae4502b",
+					"line": 117,
+					"resource_type": "aws_security_group",
+					"resource_name": "web-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{web-sg}}].egress",
+					"search_line": 117,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{web-sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{web-sg}}].egress description is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Description",
+			"query_id": "2a153952-2544-4687-bcc9-cc8fea814a9b",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid description.",
+			"description_id": "b44986be",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "b4796adcc38b289dd50d517b16e6a6e26c3d1edf715462b5a9e9d86c41e059e7",
+					"line": 19,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{environment}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "cf8a95ca4d49072649bf53703d6c8daaef04549a870515189e4962898c4df11e",
+					"line": 24,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{project}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_1.0_aws-refarch-wordpress_2025-01-01_20-12-26.tf",
+					"similarity_id": "6a45abfe5c49da5dd696f06efdfb6f682c49735ffaae58c98c018a26679ba968",
+					"line": 14,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{region}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		}
+	]
+}

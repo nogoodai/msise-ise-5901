@@ -1,0 +1,464 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 598,
+	"files_parsed": 1,
+	"lines_parsed": 586,
+	"lines_ignored": 12,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 13,
+		"LOW": 4,
+		"MEDIUM": 3,
+		"TRACE": 0
+	},
+	"total_counter": 20,
+	"total_bom_resources": 0,
+	"start": "2025-01-05T23:20:10.648219326-06:00",
+	"end": "2025-01-05T23:20:21.910391086-06:00",
+	"paths": [
+		"grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "2c1193dd3f94f96d596c5f315ececf91fa086cce7dcd089193f12bce84a84b56",
+					"line": 135,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "todo-app-api-deployment",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_deployment[todo_api_deployment]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[todo_api_deployment] has a 'aws_api_gateway_stage' resource associated",
+					"actual_value": "aws_api_gateway_deployment[todo_api_deployment] doesn't have a 'aws_api_gateway_stage' resource associated"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Endpoint Config is Not Private",
+			"query_id": "6b2739db-9c49-4db7-b980-7816e0c248c1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "The API Endpoint type in API Gateway should be set to PRIVATE so it's not exposed to the public internet",
+			"description_id": "baf9a6d6",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "3ca3c9cc29c6b356fc51c6e1b9bae91d439aad2cecbaa071149815882d67c59a",
+					"line": 125,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo_api",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_rest_api[todo_api].endpoint_configuration.types[%!s(int=0)]",
+					"search_line": 125,
+					"search_value": "",
+					"expected_value": "'aws_api_gateway_rest_api.aws_api_gateway_rest_api.types' should be 'PRIVATE'.",
+					"actual_value": "'aws_api_gateway_rest_api.aws_api_gateway_rest_api.types' is not 'PRIVATE'.",
+					"remediation": "{\"after\":\"PRIVATE\",\"before\":\"REGIONAL\"}",
+					"remediation_type": "replacement"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "a49d74743ece56c33002cb75eb0755adf1a463cb3af3dbb4935b51114aad2416",
+					"line": 537,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/api-gateway/${aws_api_gateway_rest_api.todo_api.name}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway_logs]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without API Gateway UsagePlan Associated",
+			"query_id": "b3a59b8e-94a3-403e-b6e2-527abaf12034",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have API Gateway UsagePlan defined and associated.",
+			"description_id": "a5480b6e",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "30f0132ba63cfb63d497a653856168e81f729e22ad98114737d08af0ca307cc3",
+					"line": 135,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "todo-app-api-deployment",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[todo_api_deployment]",
+					"search_line": 135,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[todo_api_deployment] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_deployment[todo_api_deployment] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With Invalid Compression",
+			"query_id": "ed35928e-195c-4405-a252-98ccb664ab7b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "API Gateway should have valid compression, which means attribute 'minimum_compression_size' should be set and its value should be greater than -1 and smaller than 10485760.",
+			"description_id": "fc02b8db",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "b096660ffce8db1c4c577b436458a3d074c23c7ce10a3e5fd8c5991dd277f387",
+					"line": 120,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo-app-api",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_rest_api[todo_api]",
+					"search_line": 120,
+					"search_value": "",
+					"expected_value": "Attribute 'minimum_compression_size' should be set and have a value greater than -1 and smaller than 10485760",
+					"actual_value": "Attribute 'minimum_compression_size' is undefined",
+					"remediation": "minimum_compression_size = 0",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 34,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 14,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Without Retention Period Specified",
+			"query_id": "ef0b316a-211e-42f1-888e-64efe172b755",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should have retention days specified",
+			"description_id": "64f08509",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "45372136792ee0d733a1995fcc2eeb219371ae354325af9eb737c01831d9b58e",
+					"line": 537,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/api-gateway/${aws_api_gateway_rest_api.todo_api.name}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway_logs]",
+					"search_line": 537,
+					"search_value": "",
+					"expected_value": "Attribute 'retention_in_days' should be set and valid",
+					"actual_value": "Attribute 'retention_in_days' is undefined",
+					"remediation": "retention_in_days = 7",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "DynamoDB Table Point In Time Recovery Disabled",
+			"query_id": "741f1291-47ac-4a85-a07b-3d32a9d6bd3e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table#point_in_time_recovery",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice to have point in time recovery enabled for DynamoDB Table",
+			"description_id": "205ac3d1",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "ac3153ff163c2a03221260b0cf80b06cc2cdf62a57869cf994e1bcb48f83eea4",
+					"line": 90,
+					"resource_type": "aws_dynamodb_table",
+					"resource_name": "aws_dynamodb_table",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_dynamodb_table[{{todo_table}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_dynamodb_table.point_in_time_recovery.enabled should be enabled",
+					"actual_value": "aws_dynamodb_table.point_in_time_recovery is missing",
+					"remediation": "point_in_time_recovery {\n\t\t enabled = true \n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Output Without Description",
+			"query_id": "59312e8a-a64e-41e7-a252-618533dd1ea8",
+			"query_url": "https://www.terraform.io/docs/language/values/outputs.html#description-output-value-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All outputs should contain a valid description.",
+			"description_id": "81535d16",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "2672a9e39b03bdd023c8200aa76358f3e1143dbb3c13e81c388c802beb6df210",
+					"line": 571,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{cognito_user_pool_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "a7aec0489cc4cf57179c400636ccf81152f45ac37997f84f759717a2c4a8e9d7",
+					"line": 579,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{cognito_domain}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "74b1563f08ca9a191c4b7e1de5b3953e2fc870080457e3d44195f753d3aa435b",
+					"line": 575,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{cognito_user_pool_client_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "1250f77a8c005d727dd744d8543d90ca4389aa3e1d84b05f37ae103500ab7463",
+					"line": 591,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{amplify_app_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "258e3d5b139316f748dbb537d8e2e4cf99c47e07271f4fd24bb7e5e4f9cb00ee",
+					"line": 583,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{dynamodb_table_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "d90dcb80102b1292791dd020f2d2a29ef226c3b8b43b6ec2a3d0104abb649014",
+					"line": 587,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{api_gateway_url}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "69106fd3cfb724decacfdeb651a9637d1b628f128aa20bc8f5cde47324f17a4a",
+					"line": 595,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{amplify_branch_url}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Type",
+			"query_id": "fc5109bf-01fd-49fb-8bde-4492b543c34a",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid type.",
+			"description_id": "bba696eb",
+			"files": [
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "5518fefa1bcadf94e8b69c2a38f8d189f213a60e4db7609e0b9ca85b32113ec1",
+					"line": 23,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{cognito_domain_prefix}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "7cf28fe87b32e8a8ec4a4caede84ef4c0269a1915132d07707af40716ab3ffb0",
+					"line": 13,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{stack_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "365aba732027f72785ffbe7bd91a57c57f313436e5c9b8b758d07288b3201208",
+					"line": 18,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{github_repo}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "grok-2-latest_0.7_aws-refarch-serverless-web-app_2025-01-02_00-24-02.tf",
+					"similarity_id": "ba85b5475e807dc9e1594e04f9175d5e992100500afbefb4aff2d94be4ff47e6",
+					"line": 8,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{region}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				}
+			]
+		}
+	]
+}

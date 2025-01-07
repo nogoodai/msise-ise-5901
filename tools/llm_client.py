@@ -46,14 +46,15 @@ def ask_from_file(model, temperature, system_prompt_file, user_prompt_file):
         return None
 
 
-def generate_output_filename(model, output_dir):
+def generate_output_filename(model, temperature, user_prompt_file_path, output_dir):
     """Generate a timestamped filename."""
     # Extract the model name part after the colon, if present
     model_name = model.split(":")[1] if ":" in model else model
     # Generate a timestamp
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # Create the output filename
-    return os.path.join(output_dir, f"{model_name}_response_{timestamp}.tf")
+    user_prompt_file_path = os.path.basename(user_prompt_file_path).replace("user_prompt-", "")
+    return os.path.join(output_dir, f"{model_name}_{temperature}_{user_prompt_file_path}_{timestamp}.tf")
 
 
 if __name__ == "__main__":
@@ -91,7 +92,7 @@ if __name__ == "__main__":
 
             if result:
                 # Generate the output filename and save the response
-                output_filename = generate_output_filename(model, output_log_dir)
+                output_filename = generate_output_filename(model, temperature, user_prompt_file_path, output_log_dir)
                 with open(output_filename, "w") as f:
                     f.write(result)
-                print(f"Response saved to {output_filename}")
+                print(f"Response saved to {output_filename} {_+1}/{num_calls}")

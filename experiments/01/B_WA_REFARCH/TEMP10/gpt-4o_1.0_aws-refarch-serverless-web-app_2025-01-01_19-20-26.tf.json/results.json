@@ -1,0 +1,279 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 273,
+	"files_parsed": 1,
+	"lines_parsed": 273,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 8,
+		"LOW": 2,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 12,
+	"total_bom_resources": 0,
+	"start": "2025-01-05T22:44:14.002060339-06:00",
+	"end": "2025-01-05T22:44:25.614298343-06:00",
+	"paths": [
+		"gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "47a8f47a07ff54e47f3f710af8032984440cd96e250850dc2d1faf7b88d7e4d1",
+					"line": 117,
+					"resource_type": "aws_apigatewayv2_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_apigatewayv2_stage[api_stage]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_apigatewayv2_stage[api_stage].default_route_settings should be defined and not null",
+					"actual_value": "aws_apigatewayv2_stage[api_stage].default_route_settings isn't defined or is null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "47a8f47a07ff54e47f3f710af8032984440cd96e250850dc2d1faf7b88d7e4d1",
+					"line": 117,
+					"resource_type": "aws_apigatewayv2_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_apigatewayv2_stage[api_stage]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'access_log_settings' should be defined",
+					"actual_value": "'access_log_settings' is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "62ecb00c451076adb94c38648217f90ef1cba46614327f1dc1c5521dab81aa6c",
+					"line": 26,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "user-pool-prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[default]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[default].mfa_configuration should be set",
+					"actual_value": "aws_cognito_user_pool[default].mfa_configuration is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 26,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "DynamoDB Table Point In Time Recovery Disabled",
+			"query_id": "741f1291-47ac-4a85-a07b-3d32a9d6bd3e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table#point_in_time_recovery",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice to have point in time recovery enabled for DynamoDB Table",
+			"description_id": "205ac3d1",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "ac3153ff163c2a03221260b0cf80b06cc2cdf62a57869cf994e1bcb48f83eea4",
+					"line": 68,
+					"resource_type": "aws_dynamodb_table",
+					"resource_name": "aws_dynamodb_table",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_dynamodb_table[{{todo_table}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_dynamodb_table.point_in_time_recovery.enabled should be enabled",
+					"actual_value": "aws_dynamodb_table.point_in_time_recovery is missing",
+					"remediation": "point_in_time_recovery {\n\t\t enabled = true \n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Output Without Description",
+			"query_id": "59312e8a-a64e-41e7-a252-618533dd1ea8",
+			"query_url": "https://www.terraform.io/docs/language/values/outputs.html#description-output-value-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All outputs should contain a valid description.",
+			"description_id": "81535d16",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "f4a9e97d359206d82c9c18a158cf911944aa972ca6463924922ab9557c05e8fa",
+					"line": 270,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{frontend_url}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "9f4615c4f60bf6238c287cd7eaaa47cda9dc019a3c5b004b801b039a473e5c58",
+					"line": 258,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{user_pool_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "37d9b8ddc6663a50361a5b67ec5135e7050dee621ba9298599ed2a43809bb933",
+					"line": 266,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{api_endpoint}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "258e3d5b139316f748dbb537d8e2e4cf99c47e07271f4fd24bb7e5e4f9cb00ee",
+					"line": 262,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{dynamodb_table_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Type",
+			"query_id": "fc5109bf-01fd-49fb-8bde-4492b543c34a",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid type.",
+			"description_id": "bba696eb",
+			"files": [
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "ba85b5475e807dc9e1594e04f9175d5e992100500afbefb4aff2d94be4ff47e6",
+					"line": 11,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{region}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "7cf28fe87b32e8a8ec4a4caede84ef4c0269a1915132d07707af40716ab3ffb0",
+					"line": 16,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{stack_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_1.0_aws-refarch-serverless-web-app_2025-01-01_19-20-26.tf",
+					"similarity_id": "5518fefa1bcadf94e8b69c2a38f8d189f213a60e4db7609e0b9ca85b32113ec1",
+					"line": 21,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{cognito_domain_prefix}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'type' should be defined and not null",
+					"actual_value": "'type' is undefined or null"
+				}
+			]
+		}
+	]
+}

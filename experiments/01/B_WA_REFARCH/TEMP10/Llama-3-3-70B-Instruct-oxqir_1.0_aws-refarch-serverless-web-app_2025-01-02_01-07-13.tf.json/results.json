@@ -1,0 +1,610 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 328,
+	"files_parsed": 1,
+	"lines_parsed": 316,
+	"lines_ignored": 12,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 10,
+		"LOW": 6,
+		"MEDIUM": 10,
+		"TRACE": 0
+	},
+	"total_counter": 26,
+	"total_bom_resources": 0,
+	"start": "2025-01-06T00:43:41.344534613-06:00",
+	"end": "2025-01-06T00:43:54.031103198-06:00",
+	"paths": [
+		"Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "5d97984615e3a90003594e55788c6c75d8038bd68d00d61078e0c00f8c4662b3",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[prod]'s corresponding aws_api_gateway_method_settings should be defined and not null",
+					"actual_value": "aws_api_gateway_stage[prod]'s corresponding aws_api_gateway_method_settings isn't defined or is null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "5d97984615e3a90003594e55788c6c75d8038bd68d00d61078e0c00f8c4662b3",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'access_log_settings' should be defined",
+					"actual_value": "'access_log_settings' is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "be2685036b2a4498a97632730d00a91ba62ee3eba6c48d113c93f196a1dd159b",
+					"line": 175,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "this",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[this] has a 'aws_api_gateway_stage' resource associated with 'access_log_settings' set",
+					"actual_value": "aws_api_gateway_deployment[this] doesn't have a 'aws_api_gateway_stage' resource associated with 'access_log_settings' set"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Method Does Not Contains An API Key",
+			"query_id": "671211c5-5d2a-4e97-8867-30fc28b02216",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "An API Key should be required on a method request.",
+			"description_id": "f133fed2",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "a8f8e33a63b69bb090e9e48287120c582bb6a5e4324e865e165defa1705c51c2",
+					"line": 158,
+					"resource_type": "aws_api_gateway_method",
+					"resource_name": "delete",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_api_gateway_method[delete]",
+					"search_line": 158,
+					"search_value": "",
+					"expected_value": "resource.aws_api_gateway_method[delete].api_key_required should be defined",
+					"actual_value": "resource.aws_api_gateway_method[delete].api_key_required is undefined",
+					"remediation": "api_key_required = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "f0d5f978a04d8dfe666b75ae0a12a5d953a34dbb707db1a7c6001d4b7580ef07",
+					"line": 142,
+					"resource_type": "aws_api_gateway_method",
+					"resource_name": "get",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_api_gateway_method[get]",
+					"search_line": 142,
+					"search_value": "",
+					"expected_value": "resource.aws_api_gateway_method[get].api_key_required should be defined",
+					"actual_value": "resource.aws_api_gateway_method[get].api_key_required is undefined",
+					"remediation": "api_key_required = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "b62430e39d4d574343d5e10e465298560ab889e3c6e786c4222394f6931b3fe7",
+					"line": 134,
+					"resource_type": "aws_api_gateway_method",
+					"resource_name": "post",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_api_gateway_method[post]",
+					"search_line": 134,
+					"search_value": "",
+					"expected_value": "resource.aws_api_gateway_method[post].api_key_required should be defined",
+					"actual_value": "resource.aws_api_gateway_method[post].api_key_required is undefined",
+					"remediation": "api_key_required = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "bd39b7fab9953fc42907ba14b772a498ee9c724508cea307294332e2dc857025",
+					"line": 150,
+					"resource_type": "aws_api_gateway_method",
+					"resource_name": "put",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_api_gateway_method[put]",
+					"search_line": 150,
+					"search_value": "",
+					"expected_value": "resource.aws_api_gateway_method[put].api_key_required should be defined",
+					"actual_value": "resource.aws_api_gateway_method[put].api_key_required is undefined",
+					"remediation": "api_key_required = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With CloudWatch Logging Disabled",
+			"query_id": "982aa526-6970-4c59-8b9b-2ce7e019fe36",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#managing-the-api-logging-cloudwatch-log-group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Logs for APIs should be enabled and using the naming convention described in documentation",
+			"description_id": "48b9d186",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "8d853411ac1271315d054ae334f28abeb518574285fa25aaf136fa2155353f2d",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_cloudwatch_log_group' should be defined and use the correct naming convention",
+					"actual_value": "'aws_cloudwatch_log_group' for the stage is not undefined or not using the correct naming convention"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Without SSL Certificate",
+			"query_id": "0b4869fc-a842-4597-aa00-1294df425440",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#client_certificate_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "295",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "SSL Client Certificate should be enabled",
+			"description_id": "6d4941dc",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "0ec8adf89de4c9b6f1ad113ccb528e1681c27d2775c4ae586c6e397c3cc1e6e5",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'client_certificate_id' should be set",
+					"actual_value": "Attribute 'client_certificate_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway without WAF",
+			"query_id": "a186e82c-1078-4a7b-85d8-579561fde884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association#resource_arn",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "API Gateway should have WAF (Web Application Firewall) enabled",
+			"description_id": "bfefa118",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "0892d6343e4fa8b1e3f79501318ef1df13b77491567abafb177e925f480b1b15",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": 180,
+					"search_value": "",
+					"expected_value": "API Gateway Stage should be associated with a Web Application Firewall",
+					"actual_value": "API Gateway Stage is not associated with a Web Application Firewall"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Stage Without API Gateway UsagePlan Associated",
+			"query_id": "c999cf62-0920-40f8-8dda-0caccd66ed7e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "API Gateway Stage should have API Gateway UsagePlan defined and associated.",
+			"description_id": "72d08d94",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "a08430d5c0c04d1c9de97b2d4b3aac6bb7d91698182a29dca8212fa0da866ddd",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[prod]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[prod] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_stage[prod] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With Invalid Compression",
+			"query_id": "ed35928e-195c-4405-a252-98ccb664ab7b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "API Gateway should have valid compression, which means attribute 'minimum_compression_size' should be set and its value should be greater than -1 and smaller than 10485760.",
+			"description_id": "fc02b8db",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "be20f5c7842d522dc19f05151f29c4fea225a0b45d0438ac690304d89efff8f0",
+					"line": 111,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo-app-api",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_rest_api[this]",
+					"search_line": 111,
+					"search_value": "",
+					"expected_value": "Attribute 'minimum_compression_size' should be set and have a value greater than -1 and smaller than 10485760",
+					"actual_value": "Attribute 'minimum_compression_size' is undefined",
+					"remediation": "minimum_compression_size = 0",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway X-Ray Disabled",
+			"query_id": "5813ef56-fa94-406a-b35d-977d4a56ff2b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#xray_tracing_enabled",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway should have X-Ray Tracing enabled",
+			"description_id": "21e236a0",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "da497442057d19fce23c99f1813ca5e718ecd3f50f004aeb7b05f6563c4e232d",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[prod].xray_tracing_enabled",
+					"search_line": 180,
+					"search_value": "",
+					"expected_value": "'aws_api_gateway_stage[prod].xray_tracing_enabled' should be set",
+					"actual_value": "'aws_api_gateway_stage[prod].xray_tracing_enabled' is undefined",
+					"remediation": "xray_tracing_enabled = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "2af233994353e1d642d3d8bf36e54ee4befb1d7cc1dca1c328e1345bff188e26",
+					"line": 36,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[this].mfa_configuration should be set",
+					"actual_value": "aws_cognito_user_pool[this].mfa_configuration is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 36,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Lambda Functions Without X-Ray Tracing",
+			"query_id": "8152e0cf-d2f0-47ad-96d5-d003a76eabd1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#tracing_config",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS Lambda functions should have TracingConfig enabled. For this, property 'tracing_Config.mode' should have the value 'Active'",
+			"description_id": "2f90e1e9",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "b29eb713ef5c9bea090f865716fbffab18a87cdcdbef9d4624f625cb5eccf29a",
+					"line": 187,
+					"resource_type": "aws_lambda_function",
+					"resource_name": "todo-app-lambda",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lambda_function[this]",
+					"search_line": 187,
+					"search_value": "",
+					"expected_value": "aws_lambda_function[this].tracing_config should be defined and not null",
+					"actual_value": "aws_lambda_function[this].tracing_config is undefined or null",
+					"remediation": "tracing_config {\n\t\tmode = Active\n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "DynamoDB Table Point In Time Recovery Disabled",
+			"query_id": "741f1291-47ac-4a85-a07b-3d32a9d6bd3e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table#point_in_time_recovery",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice to have point in time recovery enabled for DynamoDB Table",
+			"description_id": "205ac3d1",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "e22ad198ed90a64d7fdde0c64381470c967eea198d5afa4162bd640d8713894a",
+					"line": 77,
+					"resource_type": "aws_dynamodb_table",
+					"resource_name": "aws_dynamodb_table",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_dynamodb_table[{{this}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_dynamodb_table.point_in_time_recovery.enabled should be enabled",
+					"actual_value": "aws_dynamodb_table.point_in_time_recovery is missing",
+					"remediation": "point_in_time_recovery {\n\t\t enabled = true \n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Output Without Description",
+			"query_id": "59312e8a-a64e-41e7-a252-618533dd1ea8",
+			"query_url": "https://www.terraform.io/docs/language/values/outputs.html#description-output-value-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All outputs should contain a valid description.",
+			"description_id": "81535d16",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "2672a9e39b03bdd023c8200aa76358f3e1143dbb3c13e81c388c802beb6df210",
+					"line": 309,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{cognito_user_pool_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "258e3d5b139316f748dbb537d8e2e4cf99c47e07271f4fd24bb7e5e4f9cb00ee",
+					"line": 317,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{dynamodb_table_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "1250f77a8c005d727dd744d8543d90ca4389aa3e1d84b05f37ae103500ab7463",
+					"line": 325,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{amplify_app_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "d90dcb80102b1292791dd020f2d2a29ef226c3b8b43b6ec2a3d0104abb649014",
+					"line": 305,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{api_gateway_url}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "74b1563f08ca9a191c4b7e1de5b3953e2fc870080457e3d44195f753d3aa435b",
+					"line": 313,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{cognito_user_pool_client_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "b498e325c1b5390112adc34ff485fe864ec8084c767edcb9f6fbdf73ebd4908e",
+					"line": 321,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{lambda_function_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "8d3d7fb5e197bc15a0332fd3d35f8191a4da0f9a6a0c3376f6317b8f6427bbee",
+					"line": 180,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[{{prod}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[{{prod}}].tags should be defined and not null",
+					"actual_value": "aws_api_gateway_stage[{{prod}}].tags is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "565a4fcd1c58fc2878ac5fe6f97f5b75027d05eb76b7d394a389afa4f8867e68",
+					"line": 208,
+					"resource_type": "aws_iam_role",
+					"resource_name": "todo-app-lambda-exec",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_iam_role[{{lambda_exec}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_iam_role[{{lambda_exec}}].tags should be defined and not null",
+					"actual_value": "aws_iam_role[{{lambda_exec}}].tags is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_1.0_aws-refarch-serverless-web-app_2025-01-02_01-07-13.tf",
+					"similarity_id": "ca2a2c79f09b352608d3e7a6eaa7229382f8564a09c7c2c89a8d025adce9f564",
+					"line": 226,
+					"resource_type": "aws_iam_policy",
+					"resource_name": "todo-app-lambda-policy",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_iam_policy[{{lambda_policy}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_iam_policy[{{lambda_policy}}].tags should be defined and not null",
+					"actual_value": "aws_iam_policy[{{lambda_policy}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}
