@@ -1,0 +1,221 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 140,
+	"files_parsed": 1,
+	"lines_parsed": 130,
+	"lines_ignored": 10,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 7,
+		"LOW": 1,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 10,
+	"total_bom_resources": 0,
+	"start": "2025-01-18T18:39:42.570432152-06:00",
+	"end": "2025-01-18T18:39:48.300902507-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "f009169ee7ca6132e04c922ef44fa2ff5171b9a9d2da509d0ef14a7bb8bd916c",
+					"line": 51,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 51,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress_vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "8693cdb4effd2cfbdd7767650317bf1034202a8b4a405833e542a06ba7fc35a7",
+					"line": 51,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 51,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 51,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Description",
+			"query_id": "2a153952-2544-4687-bcc9-cc8fea814a9b",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid description.",
+			"description_id": "b44986be",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "8c2cddc0e9ce2517ef7fe9223ba2de16b89ad62b91b2b1fd7f1f55fc22df8a92",
+					"line": 14,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{aws_region}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "b4796adcc38b289dd50d517b16e6a6e26c3d1edf715462b5a9e9d86c41e059e7",
+					"line": 19,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{environment}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "a457b0feacf732d4cc3a6545c1218cfd17a7de9e89c179f80bbf02191e64f5b8",
+					"line": 39,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{private_subnet_cidrs}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "cf8a95ca4d49072649bf53703d6c8daaef04549a870515189e4962898c4df11e",
+					"line": 24,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{project}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "1874fe7bf4a4e7b351076e46d156b101a51fa8c5936d41ac52305ff2052e90e4",
+					"line": 29,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{vpc_cidr}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "dab008e199ac6a545d499b9f51ba6bb9c456cbcf86f99d171123f146e826c1b8",
+					"line": 34,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{public_subnet_cidrs}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-18_18-16-22.tf",
+					"similarity_id": "605be1d4e83d7c951ca352dabaec19c4334059d07c7c65bd2813dac4ecde8a07",
+					"line": 44,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{availability_zones}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		}
+	]
+}

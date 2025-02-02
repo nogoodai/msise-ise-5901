@@ -1,0 +1,1193 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 410,
+	"files_parsed": 1,
+	"lines_parsed": 390,
+	"lines_ignored": 20,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 8,
+		"INFO": 24,
+		"LOW": 3,
+		"MEDIUM": 19,
+		"TRACE": 0
+	},
+	"total_counter": 54,
+	"total_bom_resources": 0,
+	"start": "2025-01-18T19:08:16.683685013-06:00",
+	"end": "2025-01-18T19:08:22.654096505-06:00",
+	"paths": [
+		"/home/lj/kics/assets/queries/",
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf"
+	],
+	"queries": [
+		{
+			"query_name": "DB Instance Storage Not Encrypted",
+			"query_id": "08bd0760-8752-44e1-9779-7bb369b2b4e4",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#storage_encrypted",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS DB Instance should have its storage encrypted by setting the parameter to 'true'. The storage_encrypted default value is 'false'.",
+			"description_id": "88ca11bc",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "a7fb9bc2e298eb047f4e9625d4bd058de6add4c6259343eddf4dc77f911e9228",
+					"line": 249,
+					"resource_type": "aws_db_instance",
+					"resource_name": "WordPressRDS",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_rds]",
+					"search_line": 249,
+					"search_value": "",
+					"expected_value": "'storage_encrypted' should be set to true",
+					"actual_value": "'storage_encrypted' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Passwords And Secrets - Generic Password",
+			"query_id": "487f4be7-3fd9-4506-a07a-eae252180c08",
+			"query_url": "https://docs.kics.io/latest/secrets/",
+			"severity": "HIGH",
+			"platform": "Common",
+			"cwe": "798",
+			"cloud_provider": "COMMON",
+			"category": "Secret Management",
+			"experimental": false,
+			"description": "Query to find passwords and secrets in infrastructure code.",
+			"description_id": "d69d8a89",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "941bf206c2e45518987b188afbfe332ee29d88b55d8dad861a5c89a0e26bca8a",
+					"line": 256,
+					"issue_type": "RedundantAttribute",
+					"search_key": "",
+					"search_line": 0,
+					"search_value": "",
+					"expected_value": "Hardcoded secret key should not appear in source",
+					"actual_value": "Hardcoded secret key appears in source"
+				}
+			]
+		},
+		{
+			"query_name": "Sensitive Port Is Exposed To Entire Network",
+			"query_id": "381c3f2a-ef6f-4eff-99f7-b169cda3422c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for the whole network in either TCP or UDP protocol",
+			"description_id": "5be78364",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "5a3601dca0ab42e6368dd37ff4bf996181303f3b14c2889e1dc2d08da143c5e3",
+					"line": 172,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,443",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "a173b30e6e68d047f02d7578638c80e3975dfd46dbd63c30093897aa12ab7241",
+					"line": 172,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,80",
+					"expected_value": "HTTP (TCP:80) should not be allowed",
+					"actual_value": "HTTP (TCP:80) is allowed"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "a515aea04b9b38ab06fe59c2c3f057230f4ff94225444eeb765623a3366c46e6",
+					"line": 172,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,22",
+					"expected_value": "SSH (TCP:22) should not be allowed",
+					"actual_value": "SSH (TCP:22) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Unrestricted Security Group Ingress",
+			"query_id": "4728cd65-a20c-49da-8b31-9c08b423e4db",
+			"query_url": "https://www.terraform.io/docs/providers/aws/r/security_group.html",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "668",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Security groups allow ingress from 0.0.0.0:0 and/or ::/0",
+			"description_id": "ce3ee5e0",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "9375ab9184871a9decafb359e3fb285d339de0154f89e5418d3563f57f05e2b2",
+					"line": 176,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg]",
+					"search_line": 176,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "9d6126c597ab461671d1f401ecd4cdab06212e955ce790b7fcade1eca3964f2f",
+					"line": 183,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg]",
+					"search_line": 183,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "8820e54ab4bd0630fdcc1a4cefcac6b141d79b2d20e30d0bc6670148e9f99f6f",
+					"line": 190,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg]",
+					"search_line": 190,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				}
+			]
+		},
+		{
+			"query_name": "Auto Scaling Group With No Associated ELB",
+			"query_id": "8e94dced-9bcc-4203-8eb7-7e41202b2505",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#load_balancers",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "400",
+			"cloud_provider": "AWS",
+			"category": "Availability",
+			"experimental": false,
+			"description": "AWS Auto Scaling Groups must have associated ELBs to ensure high availability and improve application performance. This means the attribute 'load_balancers' must be defined and not empty.",
+			"description_id": "268307dd",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "fd49b3578537eef28f4133951f1b8ed780924ffa286ffcf39b4962a20bbf9b2d",
+					"line": 296,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "wordpress-asg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_autoscaling_group[wordpress_asg]",
+					"search_line": 296,
+					"search_value": "",
+					"expected_value": "aws_autoscaling_group[wordpress_asg].load_balancers should be set and not empty",
+					"actual_value": "aws_autoscaling_group[wordpress_asg].load_balancers is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Logging Disabled",
+			"query_id": "94690d79-b3b0-43de-b656-84ebef5753e5",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudFront distributions should have logging enabled to collect all viewer requests, which means the attribute 'logging_config' should be defined",
+			"description_id": "9cf96455",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "81f26e229169b73c68d574c6a92d428e4171a324d29597519d259a81f2d0fec5",
+					"line": 328,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress_cdn]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution[wordpress_cdn].logging_config should be defined",
+					"actual_value": "aws_cloudfront_distribution[wordpress_cdn].logging_config is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Without Minimum Protocol TLS 1.2",
+			"query_id": "00e5e55e-c2ff-46b3-a757-a7a1cd802456",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "CloudFront Minimum Protocol version should be at least TLS 1.2",
+			"description_id": "0b620722",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "e8d053268d635acd8de364a2fe6840e38ec657afa8b660562c82b8eb4caafaa0",
+					"line": 362,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_cloudfront_distribution[wordpress_cdn].viewer_certificate.cloudfront_default_certificate",
+					"search_line": 362,
+					"search_value": "",
+					"expected_value": "resource.aws_cloudfront_distribution[wordpress_cdn].viewer_certificate.cloudfront_default_certificate' should be 'false'",
+					"actual_value": "resource.aws_cloudfront_distribution[wordpress_cdn].viewer_certificate.cloudfront_default_certificate' is 'true'",
+					"remediation": "{\"after\":\"false\",\"before\":\"true\"}",
+					"remediation_type": "replacement"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Without WAF",
+			"query_id": "1419b4c6-6d5c-4534-9cf6-6a5266085333",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All AWS CloudFront distributions should be integrated with the Web Application Firewall (AWS WAF) service",
+			"description_id": "8fa5ef1b",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "5e035d59feaab1f2970332dee4592c124471ed50591f6e6831decfc8eccf353f",
+					"line": 328,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress_cdn].web_acl_id",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'web_acl_id'  should exist",
+					"actual_value": "'web_acl_id' is missing"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Logging Disabled",
+			"query_id": "7dbba512-e244-42dc-98bb-422339827967",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_query_log",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Check if CloudWatch logging is disabled for Route53 hosted zones",
+			"description_id": "b4a8c275",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "ec25db51e22630ef6a106880f830882aa22a292b532fa457537f37fd3b4bc07a",
+					"line": 378,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_zone]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_route53_query_log' should be set for respective 'aws_route53_zone'",
+					"actual_value": "'aws_route53_query_log' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Cloudfront Viewer Protocol Policy Allows HTTP",
+			"query_id": "55af1353-2f62-4fa0-a8e1-a210ca2708f5",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "319",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "Checks if the connection between CloudFront and the viewer is encrypted",
+			"description_id": "3547cd5a",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "23a499b30679fbcdcc9ae8f128ee9cb450f44539de799f7078d031d23349a113",
+					"line": 349,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "IncorrectValue",
+					"search_key": "resource.aws_cloudfront_distribution[wordpress_cdn].default_cache_behavior.viewer_protocol_policy",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "resource.aws_cloudfront_distribution[wordpress_cdn].default_cache_behavior.viewer_protocol_policy should be 'https-only' or 'redirect-to-https'",
+					"actual_value": "resource.aws_cloudfront_distribution[wordpress_cdn].default_cache_behavior.viewer_protocol_policy isn't 'https-only' or 'redirect-to-https'"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Has Public IP",
+			"query_id": "5a2486aa-facf-477d-a5c1-b010789459ce",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "EC2 Instance should not have a public IP address.",
+			"description_id": "c6f1d1f4",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "fe26a0b9d344c7438b865bbef54dc68cb89279a9af67f0ad16e77dcb190d2ebb",
+					"line": 232,
+					"resource_type": "aws_instance",
+					"resource_name": "WordPressEC2${count.index + 1}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.wordpress_ec2",
+					"search_line": 232,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be defined and not null",
+					"actual_value": "'associate_public_ip_address' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Monitoring Disabled",
+			"query_id": "23b70e32-032e-4fa6-ba5c-82f56b9980e6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#monitoring",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "EC2 Instance should have detailed monitoring enabled. With detailed monitoring enabled data is available in 1-minute periods",
+			"description_id": "0d5413e6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "1f590aa548073264ebe3ff247c9367d7333ab548c29b4396de748e500083b922",
+					"line": 232,
+					"resource_type": "aws_instance",
+					"resource_name": "WordPressEC2${count.index + 1}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance.{{wordpress_ec2}}",
+					"search_line": 232,
+					"search_value": "",
+					"expected_value": "'monitoring' should be defined and not null",
+					"actual_value": "'monitoring' is undefined or null",
+					"remediation": "monitoring = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "ELB Access Log Disabled",
+			"query_id": "20018359-6fd7-4d05-ab26-d4dffccbdf79",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb#enabled",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "ELB should have logging enabled to help on error investigation",
+			"description_id": "c745bca6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "e40d03053fcf3e57d640cbd2517c7dd00846490d4a402038e75703748e5c1ab6",
+					"line": 277,
+					"resource_type": "aws_elb",
+					"resource_name": "wordpress-elb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_elb[{{wordpress_elb}}]",
+					"search_line": 277,
+					"search_value": "",
+					"expected_value": "'aws_elb[{{wordpress_elb}}].access_logs' should be defined and not null",
+					"actual_value": "'aws_elb[{{wordpress_elb}}].access_logs' is undefined or null",
+					"remediation": "access_logs {\n\t\tenabled = true\n\t}",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "HTTP Port Open To Internet",
+			"query_id": "ffac8a12-322e-42c1-b9b9-81ff85c39ef7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "319",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "The HTTP port is open to the internet in a Security Group",
+			"description_id": "a829609b",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "ba51a3723de1af1f40fb1e4cfcf8a4ffb17617aa0020a8b15a86f2e7cb589f96",
+					"line": 167,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_security_group.ingress shouldn't open the HTTP port (80)",
+					"actual_value": "aws_security_group.ingress opens the HTTP port (80)"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Database Auth Not Enabled",
+			"query_id": "88fd05e0-ac0e-43d2-ba6d-fc0ba60ae1a6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iam_database_authentication_enabled",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "IAM Database Auth Enabled should be configured to true when using compatible engine and version",
+			"description_id": "12b1c8aa",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "0ff32fa0e2ca5cfe90fff75104781279de36dfe1d244ad78da32bd1cbeb098b6",
+					"line": 249,
+					"resource_type": "aws_db_instance",
+					"resource_name": "WordPressRDS",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_rds]",
+					"search_line": 249,
+					"search_value": "",
+					"expected_value": "'iam_database_authentication_enabled' should be set to true",
+					"actual_value": "'iam_database_authentication_enabled' is undefined or null",
+					"remediation": "iam_database_authentication_enabled = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "RDS With Backup Disabled",
+			"query_id": "1dc73fb4-5b51-430c-8c5f-25dcf9090b02",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "754",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "Make sure the AWS RDS configuration has automatic backup configured. If the retention period is equal to 0 there is no backup",
+			"description_id": "73fdfe55",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "21fad202391c20f8fb13952701f02a79c39933314b16841726866a735c470b85",
+					"line": 249,
+					"resource_type": "aws_db_instance",
+					"resource_name": "WordPressRDS",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_rds]",
+					"search_line": 249,
+					"search_value": "",
+					"expected_value": "'backup_retention_period' should be defined, and bigger than '0'",
+					"actual_value": "'backup_retention_period' is not defined",
+					"remediation": "backup_retention_period = 12",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "RDS Without Logging",
+			"query_id": "8d7f7b8c-6c7c-40f8-baa6-62006c6c7b56",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#enabled_cloudwatch_logs_exports",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "RDS does not have any kind of logger",
+			"description_id": "c499a58c",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "a8063541b6238bef9683e96a91c6a311ebca96567b49b9fd37421dbd16fe3363",
+					"line": 249,
+					"resource_type": "aws_db_instance",
+					"resource_name": "WordPressRDS",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_rds]",
+					"search_line": 249,
+					"search_value": "",
+					"expected_value": "'enabled_cloudwatch_logs_exports' should be defined",
+					"actual_value": "'enabled_cloudwatch_logs_exports' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Logging Disabled",
+			"query_id": "f861041c-8c9f-4156-acfc-5e6e524f5884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Server Access Logging should be enabled on S3 Buckets so that all changes are logged and trackable",
+			"description_id": "fa5c7c72",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "76be0298b7aa90ff7431e7ac74181a77eccab9a3bfeec6c433afe98b77a5ad16",
+					"line": 367,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[wordpress_bucket]",
+					"search_line": 367,
+					"search_value": "",
+					"expected_value": "'logging' should be defined and not null",
+					"actual_value": "'logging' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Versioning",
+			"query_id": "568a4d22-3517-44a6-a7ad-6a7eed88722c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "S3 bucket should have versioning enabled",
+			"description_id": "7614ce3b",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "37c28194c6daf439777bf3b0388555e7291a1f15d001d95b28f0cd2caf37f2c2",
+					"line": 367,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[wordpress_bucket]",
+					"search_line": 367,
+					"search_value": "",
+					"expected_value": "'versioning' should be true",
+					"actual_value": "'versioning' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group With Unrestricted Access To SSH",
+			"query_id": "65905cec-d691-4320-b320-2000436cb696",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "732",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "'SSH' (TCP:22) should not be public in AWS Security Group",
+			"description_id": "51e59188",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "1d484eeac2cedee838b826c5e706b335e28a30fdfae2819c7c377d6f4fa43744",
+					"line": 176,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[ec2_sg].ingress.cidr_blocks",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_security_group[ec2_sg] 'SSH' (Port:22) should not be public",
+					"actual_value": "aws_security_group[ec2_sg] 'SSH' (Port:22) is public"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "fa3fa42671e74405142edcd3bf412efb8678427a44e2433639b99b22f5642b0a",
+					"line": 82,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 82,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress_vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "363872941c91ac39bd480261705373151d025cbba128d0203300af0ec3a764d5",
+					"line": 82,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 82,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "Vulnerable Default SSL Certificate",
+			"query_id": "3a1e94df-6847-4c0e-a3b6-6c6af4e128ef",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "295",
+			"cloud_provider": "AWS",
+			"category": "Insecure Defaults",
+			"experimental": false,
+			"description": "CloudFront web distributions should use custom (and not default) SSL certificates. Custom SSL certificates allow only defined users to access content by using an alternate domain name instead of the default one.",
+			"description_id": "38579a53",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "1a184861771bfb48af12a32a4f2b1f23cbeba21d1b01c536288b08e72b768359",
+					"line": 361,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cloudfront_distribution[wordpress_cdn].viewer_certificate",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'cloudfront_default_certificate' should be 'false' or not defined",
+					"actual_value": "Attribute 'cloudfront_default_certificate' is 'true'"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 82,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "da522e5ee9157e75c335d061976f2ca900400be7d67f43f32650cf717d5088a5",
+					"line": 378,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_zone]",
+					"search_line": 378,
+					"search_value": "",
+					"expected_value": "aws_route53_zone has shield advanced associated",
+					"actual_value": "aws_route53_zone does not have shield advanced associated"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "da2c0837029a1fbf7707585470ccd3b8492948f4a552fcbe33c328131c8dcfc6",
+					"line": 328,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress_cdn]",
+					"search_line": 328,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Not EBS Optimized",
+			"query_id": "60224630-175a-472a-9e23-133827040766",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs_optimized",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for an EC2 instance to use an EBS optimized instance. This provides the best performance for your EBS volumes by minimizing contention between Amazon EBS I/O and other traffic from your instance",
+			"description_id": "ddce4bd9",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "5d23f01a032fe539ee6d16b73972bf339ffda64aa089f1b148864fef53b1638d",
+					"line": 232,
+					"resource_type": "aws_instance",
+					"resource_name": "WordPressEC2${count.index + 1}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance[{{wordpress_ec2}}]",
+					"search_line": 232,
+					"search_value": "",
+					"expected_value": "'ebs_optimized' should be set to true",
+					"actual_value": "'ebs_optimized' is undefined or null",
+					"remediation": "ebs_optimized = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Output Without Description",
+			"query_id": "59312e8a-a64e-41e7-a252-618533dd1ea8",
+			"query_url": "https://www.terraform.io/docs/language/values/outputs.html#description-output-value-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All outputs should contain a valid description.",
+			"description_id": "81535d16",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "36bb6561c660b04256f8b50000d2632918cb3ddc1e356c70d08aa7cd62fd3bf8",
+					"line": 403,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{wordpress_s3_bucket_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "065f08e05ec003154e352341c7c8804722789105a380de2e033bd79b222b4132",
+					"line": 407,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{wordpress_route53_zone_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "17a73ab1dae37589aec1f685a50527b55ed6c1f784e7a85a93cfa6c88798bcfc",
+					"line": 399,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{wordpress_rds_endpoint}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "2aa14b0c684c9352fdf369ef7f8f7118d33588329f342e38820f4463b6bfad0d",
+					"line": 395,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "output.{{wordpress_elb_dns_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "7b3d8daacb2cb7446b34ab8edf4d66af0d67044dfa82f21f0589eed08b870563",
+					"line": 328,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress_cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[{{wordpress_cdn}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution[{{wordpress_cdn}}].tags should be defined and not null",
+					"actual_value": "aws_cloudfront_distribution[{{wordpress_cdn}}].tags is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "eb5693ce100c6a7c4d18b9ca241445277cf92cfbd8fc5ea2b2402961aa756230",
+					"line": 378,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[{{wordpress_zone}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_route53_zone[{{wordpress_zone}}].tags should be defined and not null",
+					"actual_value": "aws_route53_zone[{{wordpress_zone}}].tags is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group Rule Without Description",
+			"query_id": "68eb4bf3-f9bf-463d-b5cf-e029bb446d2e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for all rules in AWS Security Group to have a description",
+			"description_id": "cee242dd",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "3de1389e02421db672b496914fe66320b5f5f04d128b955c921a453ed62acfa2",
+					"line": 193,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{ec2_sg}}].egress",
+					"search_line": 193,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{ec2_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{ec2_sg}}].egress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "bca818dae7467e73ca8b94d329ac24c0140fedfb4f22fd7369a72d3b96384e60",
+					"line": 179,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{ec2_sg}}].ingress",
+					"search_line": 179,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{ec2_sg}}].ingress description should be defined and not null",
+					"actual_value": "aws_security_group[{{ec2_sg}}].ingress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "046b21e608ad34b8d94f7cb1ce6ce9340815720692192ef4acce9c06e88fbd7f",
+					"line": 186,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{ec2_sg}}].ingress",
+					"search_line": 186,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{ec2_sg}}].ingress description should be defined and not null",
+					"actual_value": "aws_security_group[{{ec2_sg}}].ingress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "e2bd45b989456503ca58068a6e6cc17d6026d08f11627c77526783ef3db499d5",
+					"line": 211,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressRDSSG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{rds_sg}}].ingress",
+					"search_line": 211,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{rds_sg}}].ingress description should be defined and not null",
+					"actual_value": "aws_security_group[{{rds_sg}}].ingress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "fc385681e00f8101b6638282d048a6c72069b2d5a36d6307f3e8bd990374e5df",
+					"line": 172,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressEC2SG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{ec2_sg}}].ingress",
+					"search_line": 172,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{ec2_sg}}].ingress description should be defined and not null",
+					"actual_value": "aws_security_group[{{ec2_sg}}].ingress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "56350811600de1fe0275e0d3fc407c8a77d767620405149b88c5745330a00a66",
+					"line": 218,
+					"resource_type": "aws_security_group",
+					"resource_name": "WordPressRDSSG",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{rds_sg}}].egress",
+					"search_line": 218,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{rds_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{rds_sg}}].egress description is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Variable Without Description",
+			"query_id": "2a153952-2544-4687-bcc9-cc8fea814a9b",
+			"query_url": "https://www.terraform.io/docs/language/values/variables.html#input-variable-documentation",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "COMMON",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "All variables should contain a valid description.",
+			"description_id": "b44986be",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "823c4ad96bdd1667745e5ca400a1c726c772ff91c55694699b7358b9316580d4",
+					"line": 76,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{domain_name}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "67a215c4d1cc2afb345d0f70e60e9edd60a3f30a33b0afceec5cbf8efb4ebbb3",
+					"line": 51,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{ami_id}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "caecd3e559187878861e60fe8d1130e4a5e458a27c97816c7c65a906b92d97b3",
+					"line": 56,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{database_instance_class}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "3dd4121458f015fa7e806b2a2de301d21ea90d31da814fd3c75cc82348f9fcf9",
+					"line": 30,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{private_subnets}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "8dc4d3521a0d7b83a247cf39bfcf0129a3ae9864ca0d0b5757c1eb3815d1befb",
+					"line": 71,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{cache_engine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "a2ec38a0d00cd433762045a652c095364c3da22e0b26f10db1aa124c776c5555",
+					"line": 66,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{cache_node_type}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "605be1d4e83d7c951ca352dabaec19c4334059d07c7c65bd2813dac4ecde8a07",
+					"line": 38,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{availability_zones}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "1874fe7bf4a4e7b351076e46d156b101a51fa8c5936d41ac52305ff2052e90e4",
+					"line": 17,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{vpc_cidr}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "b7c533a9d9b8844ad7a344420896e021de4feeb4edcf64c4d4528e8824400f44",
+					"line": 46,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{instance_type}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "bfe2a8335dc7f7551fbd40c4fe31ea2d3a45514c02a48cb22bd8bdcdd325b55b",
+					"line": 22,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{public_subnets}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-14_11-48-09.tf",
+					"similarity_id": "17468b36899dcbd3af92a65410787f2d286c7c42bd1bf9bf30a3802b8b0cb7fa",
+					"line": 61,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "variable.{{database_engine}}",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'description' should be defined and not null",
+					"actual_value": "'description' is undefined or null"
+				}
+			]
+		}
+	]
+}
