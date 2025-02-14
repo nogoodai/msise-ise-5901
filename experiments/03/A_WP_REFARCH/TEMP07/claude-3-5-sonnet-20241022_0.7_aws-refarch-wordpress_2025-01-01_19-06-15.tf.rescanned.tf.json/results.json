@@ -1,0 +1,236 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 200,
+	"files_parsed": 1,
+	"lines_parsed": 189,
+	"lines_ignored": 11,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 6,
+		"LOW": 2,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 10,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T07:00:57.223292815-06:00",
+	"end": "2025-02-11T07:01:32.33781079-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "5a17c9c6b0fbc52a68d0864a81cb0d83bb3d503c548d26f3091ea732b8e880e2",
+					"line": 65,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/flow-log/${aws_vpc.wordpress_vpc.id}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[vpc_flow_log]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "d4b7d90ef4d4f8486e093485225fec095a896d9a0b74d378338194240e2d87fa",
+					"line": 46,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 46,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 46,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Sensitive Port Is Exposed To Wide Private Network",
+			"query_id": "92fe237e-074c-4262-81a4-2077acb928c1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for a wide private network in either TCP or UDP protocol",
+			"description_id": "127a32be",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "fdcc6245da17db9c3b84084cebb2bc990875470111a024fc4410b3925d39b345",
+					"line": 92,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-alb-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[alb].ingress",
+					"search_line": 92,
+					"search_value": "",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "f2b7b1d5b1f1e9acdb970f287aaaed6e00f877aeda4db4e43defdee037b6e7d2",
+					"line": 175,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-alb-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{alb}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{alb}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{alb}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "3c6c8b739e30e95284efed1e9cb3dd60bbb50fbb82f8ef3ebae085ac0f0cccb0",
+					"line": 65,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/flow-log/${aws_vpc.wordpress_vpc.id}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[{{vpc_flow_log}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudwatch_log_group[{{vpc_flow_log}}].tags should be defined and not null",
+					"actual_value": "aws_cloudwatch_log_group[{{vpc_flow_log}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "631e0d418f70b0bfea7eb0b7bb4b494231f5061d29ba562fe6f65b96a27dfd8b",
+					"line": 70,
+					"resource_type": "aws_iam_role",
+					"resource_name": "vpc-flow-log-role",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_iam_role[{{vpc_flow_log_role}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_iam_role[{{vpc_flow_log_role}}].tags should be defined and not null",
+					"actual_value": "aws_iam_role[{{vpc_flow_log_role}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "2be9b25187f18ac78fea3f77eeb61d95da2c3a5e1300806b3b820e95092c48c2",
+					"line": 58,
+					"resource_type": "aws_flow_log",
+					"resource_name": "vpc_flow_log",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{vpc_flow_log}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{vpc_flow_log}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{vpc_flow_log}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "471993a1327d951fb30532f482a8e47d054aa7c8939b1157ea93ad05816d4bb6",
+					"line": 180,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-cloudfront-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{cloudfront}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{cloudfront}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{cloudfront}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-06-15.tf.rescanned.tf",
+					"similarity_id": "86598431211fa121eff161f47dc8cb47f79442acc0e4b16b169c67d61cd4da93",
+					"line": 163,
+					"resource_type": "aws_wafregional_web_acl",
+					"resource_name": "wordpress-waf-acl",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafregional_web_acl[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafregional_web_acl[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_wafregional_web_acl[{{wordpress}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

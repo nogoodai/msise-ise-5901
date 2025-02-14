@@ -1,0 +1,229 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 250,
+	"files_parsed": 1,
+	"lines_parsed": 247,
+	"lines_ignored": 3,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 2,
+		"LOW": 1,
+		"MEDIUM": 5,
+		"TRACE": 0
+	},
+	"total_counter": 8,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:14:11.073934044-06:00",
+	"end": "2025-02-03T21:14:21.193409936-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "Auto Scaling Group With No Associated ELB",
+			"query_id": "8e94dced-9bcc-4203-8eb7-7e41202b2505",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#load_balancers",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "400",
+			"cloud_provider": "AWS",
+			"category": "Availability",
+			"experimental": false,
+			"description": "AWS Auto Scaling Groups must have associated ELBs to ensure high availability and improve application performance. This means the attribute 'load_balancers' must be defined and not empty.",
+			"description_id": "268307dd",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "a9147bb1f223e2cbd66c51d145feb3a825ecc71b046b08e276bafd1f51f6732d",
+					"line": 215,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "wordpress-project-wordpress-asg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_autoscaling_group[wordpress_asg]",
+					"search_line": 215,
+					"search_value": "",
+					"expected_value": "aws_autoscaling_group[wordpress_asg].load_balancers should be set and not empty",
+					"actual_value": "aws_autoscaling_group[wordpress_asg].load_balancers is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "444f6145239b4a6bfc5cf07f27d1cc5e59e630b95220ed5dea6a05f6c301722c",
+					"line": 41,
+					"resource_type": "aws_vpc",
+					"resource_name": "main",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[main]",
+					"search_line": 41,
+					"search_value": "",
+					"expected_value": "aws_vpc[main] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[main] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Subnet Assigns Public IP",
+			"query_id": "52f04a44-6bfa-4c41-b1d3-4ae99a2de05c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#map_public_ip_on_launch",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "732",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC Subnet should not assign public IP",
+			"description_id": "2b7ea60d",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "f2741d85c13d9c7a42d532ae510f0b54f7eee9a9f03687f796f2d65673365b7a",
+					"line": 66,
+					"resource_type": "aws_subnet",
+					"resource_name": "wordpress-project-public-subnet-1",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_subnet[public_1].map_public_ip_on_launch",
+					"search_line": 66,
+					"search_value": "",
+					"expected_value": "aws_subnet[public_1].map_public_ip_on_launch should be set to false or undefined",
+					"actual_value": "aws_subnet[public_1].map_public_ip_on_launch is set to true",
+					"remediation": "{\"after\":\"false\",\"before\":\"true\"}",
+					"remediation_type": "replacement"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "6816837532dd1a0db36392776d96fb47a3519507a562d3d5e92b1857ae1b19a2",
+					"line": 80,
+					"resource_type": "aws_subnet",
+					"resource_name": "wordpress-project-public-subnet-2",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_subnet[public_2].map_public_ip_on_launch",
+					"search_line": 80,
+					"search_value": "",
+					"expected_value": "aws_subnet[public_2].map_public_ip_on_launch should be set to false or undefined",
+					"actual_value": "aws_subnet[public_2].map_public_ip_on_launch is set to true",
+					"remediation": "{\"after\":\"false\",\"before\":\"true\"}",
+					"remediation_type": "replacement"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "596874b3bdfbc4b24f4c29e3ef68e5d353840bf2d50213b7791650bab065f7a2",
+					"line": 41,
+					"resource_type": "aws_vpc",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[main]",
+					"search_line": 41,
+					"search_value": "",
+					"expected_value": "aws_vpc[main] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[main] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 41,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group Rule Without Description",
+			"query_id": "68eb4bf3-f9bf-463d-b5cf-e029bb446d2e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for all rules in AWS Security Group to have a description",
+			"description_id": "cee242dd",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "5ad5d23cbdfa20f473f3dfe672fb21a01ab0876c9eeb10febda4e7d8ee81d401",
+					"line": 145,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-project-web-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{web_sg}}].egress",
+					"search_line": 145,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{web_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{web_sg}}].egress description is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-44-22.tf.rescanned.tf",
+					"similarity_id": "375fe150a484f059f6e012a46c472bbddadae4b35bafbab902607c0ad13e2248",
+					"line": 153,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-project-web-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{web_sg}}].egress",
+					"search_line": 153,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{web_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{web_sg}}].egress description is undefined or null"
+				}
+			]
+		}
+	]
+}

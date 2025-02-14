@@ -1,0 +1,184 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 245,
+	"files_parsed": 1,
+	"lines_parsed": 237,
+	"lines_ignored": 8,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 3,
+		"MEDIUM": 3,
+		"TRACE": 0
+	},
+	"total_counter": 6,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T06:54:22.90490453-06:00",
+	"end": "2025-02-11T06:54:59.336918707-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "ALB Is Not Integrated With WAF",
+			"query_id": "0afa6ab8-a047-48cf-be07-93a2f8c34cf7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All Application Load Balancers (ALB) must be protected with Web Application Firewall (WAF) service",
+			"description_id": "4e4c668d",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "8df69f4c1d2b2d554e59c98d169e754b269c73ef617d33ddaff63ec665add5cd",
+					"line": 150,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_lb[wordpress]' should not be 'internal' and has a 'aws_wafregional_web_acl_association' associated",
+					"actual_value": "'aws_lb[wordpress]' is not 'internal' and does not have a 'aws_wafregional_web_acl_association' associated"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "5a17c9c6b0fbc52a68d0864a81cb0d83bb3d503c548d26f3091ea732b8e880e2",
+					"line": 82,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/wordpress-flow-log",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[vpc_flow_log]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "c28504f7c86e9c18fb84abb9e5a3892dbf3f1b3e63dcd4c471962ab45b6709e2",
+					"line": 59,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 59,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 24,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "4641984630e525acc39b359991a54e02a4a06c4c9da2495886618c6e6328e3ab",
+					"line": 180,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress]",
+					"search_line": 180,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-00-33.tf.rescanned.tf",
+					"similarity_id": "6d1b168abb322b67b628dd866c754f852bd6b21aa820a580fa7ebf44e2d2ae05",
+					"line": 150,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": 150,
+					"search_value": "",
+					"expected_value": "aws_lb has shield advanced associated",
+					"actual_value": "aws_lb does not have shield advanced associated"
+				}
+			]
+		}
+	]
+}

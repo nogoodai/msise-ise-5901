@@ -1,0 +1,199 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 546,
+	"files_parsed": 1,
+	"lines_parsed": 525,
+	"lines_ignored": 21,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 1,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 4,
+		"TRACE": 0
+	},
+	"total_counter": 6,
+	"total_bom_resources": 0,
+	"start": "2025-02-13T08:35:06.311477231-06:00",
+	"end": "2025-02-13T08:35:11.673984337-06:00",
+	"paths": [
+		"/home/lj/kics/assets/queries/",
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf"
+	],
+	"queries": [
+		{
+			"query_name": "SNS Topic Not Encrypted",
+			"query_id": "28545147-2fc6-42d5-a1f9-cf226658e591",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic#kms_master_key_id",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "SNS (Simple Notification Service) Topic should be encrypted",
+			"description_id": "2f15b2d0",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "8aac47dcd77dc2d00002fdf38c81d3ce220f234ac48c3f05a7b27412b634e560",
+					"line": 474,
+					"resource_type": "aws_sns_topic",
+					"resource_name": "wordpress-sns-topic",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_sns_topic[wordpress_sns_topic]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "SNS Topic should be encrypted",
+					"actual_value": "SNS Topic is not encrypted"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "95fc986a4affd880d5b498e60668bee1488655f19be077a6b9fe75e0b47def20",
+					"line": 441,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "wordpress-log-group",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[wordpress_log_group]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Logging Disabled",
+			"query_id": "7dbba512-e244-42dc-98bb-422339827967",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_query_log",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Check if CloudWatch logging is disabled for Route53 hosted zones",
+			"description_id": "b4a8c275",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "d1e3156d382057fe2da4acaefd9d5f57f5af72aae3dc8fd546237910297195b1",
+					"line": 420,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_dns]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_route53_query_log' should be set for respective 'aws_route53_zone'",
+					"actual_value": "'aws_route53_query_log' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "bb9531172085d60bd06a6bc8adf958a64d6c4ddd18b5263ae0f54b4f258a607e",
+					"line": 54,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 54,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress_vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "85d422da8976988fa2f6576e1bc0877955a6b967f1349886a85220a1c4de7544",
+					"line": 54,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 54,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Enabled MFA Delete",
+			"query_id": "c5b31ab9-0f26-4a49-b8aa-4cc064392f4d",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#mfa_delete",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "S3 bucket without MFA Delete Enabled. MFA delete cannot be enabled through Terraform, it can be done by adding a MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html) and enabling versioning and MFA delete by using AWS CLI: 'aws s3api put-bucket-versioning --versioning-configuration=Status=Enabled,MFADelete=Enabled --bucket=\u003cBUCKET_NAME\u003e --mfa=\u003cMFA_SERIAL_NUMBER\u003e'. Please, also notice that MFA delete can not be used with lifecycle configurations",
+			"description_id": "e1699d08",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_20-35-51.tf.rescanned.tf",
+					"similarity_id": "35ae28d1364e4a347180b8c889e37a9ad4be0484de271c6b3c1be15d3c8b8cc9",
+					"line": 405,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[wordpress_s3].versioning",
+					"search_line": 405,
+					"search_value": "",
+					"expected_value": "'mfa_delete' should be set to true",
+					"actual_value": "'mfa_delete' is undefined or null"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,268 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 270,
+	"files_parsed": 1,
+	"lines_parsed": 262,
+	"lines_ignored": 8,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 2,
+		"LOW": 3,
+		"MEDIUM": 4,
+		"TRACE": 0
+	},
+	"total_counter": 9,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T06:56:46.681280296-06:00",
+	"end": "2025-02-11T06:57:21.995585571-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "ALB Is Not Integrated With WAF",
+			"query_id": "0afa6ab8-a047-48cf-be07-93a2f8c34cf7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All Application Load Balancers (ALB) must be protected with Web Application Firewall (WAF) service",
+			"description_id": "4e4c668d",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "8df69f4c1d2b2d554e59c98d169e754b269c73ef617d33ddaff63ec665add5cd",
+					"line": 171,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_lb[wordpress]' should not be 'internal' and has a 'aws_wafregional_web_acl_association' associated",
+					"actual_value": "'aws_lb[wordpress]' is not 'internal' and does not have a 'aws_wafregional_web_acl_association' associated"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Logging Disabled",
+			"query_id": "94690d79-b3b0-43de-b656-84ebef5753e5",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudFront distributions should have logging enabled to collect all viewer requests, which means the attribute 'logging_config' should be defined",
+			"description_id": "9cf96455",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "db73b545d9cb5d534b1c14b7f864a88da5f6266f495772684278cd370005c1a7",
+					"line": 200,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution[wordpress].logging_config should be defined",
+					"actual_value": "aws_cloudfront_distribution[wordpress].logging_config is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "88f19f0be97adf9be220c6d8e98c45ac89732ad7c48a2e9a07a216e69c710ffb",
+					"line": 46,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 46,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress_vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "d4b7d90ef4d4f8486e093485225fec095a896d9a0b74d378338194240e2d87fa",
+					"line": 46,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 46,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 30,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "400d1b19b26122062419355a388ecd261b6e883a2773113949df31fbc8368969",
+					"line": 200,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress]",
+					"search_line": 200,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "809a4df7015c0cfd37859600b5f6c02ba2b50e51cc269f26006af368d30d19e5",
+					"line": 171,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": 171,
+					"search_value": "",
+					"expected_value": "aws_lb has shield advanced associated",
+					"actual_value": "aws_lb does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "ea24858ddc23e3314e305d1c1c5c4e7c56f970127acd49a2fe1b09130d098f18",
+					"line": 188,
+					"resource_type": "aws_wafv2_web_acl",
+					"resource_name": "wordpress-waf",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafv2_web_acl[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafv2_web_acl[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_wafv2_web_acl[{{wordpress}}].tags is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group Not Used",
+			"query_id": "4849211b-ac39-479e-ae78-5694d506cb24",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "Security group must be used or not declared",
+			"description_id": "eff2383a",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-02-39.tf.rescanned.tf",
+					"similarity_id": "a87ab9842faf6f3a3c8b7d1833cb0e03fbfecad8673409d662c04c202d3410d4",
+					"line": 113,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-ec2-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[wordpress]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_security_group[wordpress]' should be used",
+					"actual_value": "'aws_security_group[wordpress]' is not used"
+				}
+			]
+		}
+	]
+}

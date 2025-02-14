@@ -1,0 +1,87 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 392,
+	"files_parsed": 1,
+	"lines_parsed": 392,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 2,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:29:49.031847388-06:00",
+	"end": "2025-02-03T21:29:59.255223783-06:00",
+	"paths": [
+		"gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-33-52.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-33-52.tf.rescanned.tf",
+					"similarity_id": "267a55d7c8495dec97293868944efb76e90b90f025692882bedce0fe9c5120db",
+					"line": 159,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/api-gateway/my-app-stack",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gw_logs]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-33-52.tf.rescanned.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 37,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-app-stack-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[main] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		}
+	]
+}

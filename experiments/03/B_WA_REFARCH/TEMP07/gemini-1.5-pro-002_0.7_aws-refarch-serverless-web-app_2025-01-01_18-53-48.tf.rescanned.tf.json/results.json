@@ -1,0 +1,115 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 289,
+	"files_parsed": 1,
+	"lines_parsed": 288,
+	"lines_ignored": 1,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 3,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:15:59.679138439-06:00",
+	"end": "2025-02-03T21:16:09.95635711-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-53-48.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "S3 Bucket Logging Disabled",
+			"query_id": "f861041c-8c9f-4156-acfc-5e6e524f5884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Server Access Logging should be enabled on S3 Buckets so that all changes are logged and trackable",
+			"description_id": "fa5c7c72",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-53-48.tf.rescanned.tf",
+					"similarity_id": "242dacee4f7e58898e8a10e163737c86d049d9b0848ee34b950cb44a58130d2a",
+					"line": 188,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "todo-app-todo-app-website",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[main]",
+					"search_line": 188,
+					"search_value": "",
+					"expected_value": "'logging' should be defined and not null",
+					"actual_value": "'logging' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Versioning",
+			"query_id": "568a4d22-3517-44a6-a7ad-6a7eed88722c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "S3 bucket should have versioning enabled",
+			"description_id": "7614ce3b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-53-48.tf.rescanned.tf",
+					"similarity_id": "a1267546d1baee4770944965771b2be7734f85c7b62edf082935bdd142d6cbe7",
+					"line": 188,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "todo-app-todo-app-website",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[main]",
+					"search_line": 188,
+					"search_value": "",
+					"expected_value": "'versioning' should be true",
+					"actual_value": "'versioning' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-53-48.tf.rescanned.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 53,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool-todo-app",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is set to 'OFF'"
+				}
+			]
+		}
+	]
+}

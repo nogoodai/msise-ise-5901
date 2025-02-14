@@ -1,0 +1,197 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 225,
+	"files_parsed": 1,
+	"lines_parsed": 216,
+	"lines_ignored": 9,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 2,
+		"LOW": 4,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 7,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T07:05:07.089955484-06:00",
+	"end": "2025-02-11T07:05:42.353371543-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "ALB Is Not Integrated With WAF",
+			"query_id": "0afa6ab8-a047-48cf-be07-93a2f8c34cf7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All Application Load Balancers (ALB) must be protected with Web Application Firewall (WAF) service",
+			"description_id": "4e4c668d",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "8df69f4c1d2b2d554e59c98d169e754b269c73ef617d33ddaff63ec665add5cd",
+					"line": 104,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_lb[wordpress]' should not be 'internal' and has a 'aws_wafregional_web_acl_association' associated",
+					"actual_value": "'aws_lb[wordpress]' is not 'internal' and does not have a 'aws_wafregional_web_acl_association' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 46,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Sensitive Port Is Exposed To Wide Private Network",
+			"query_id": "92fe237e-074c-4262-81a4-2077acb928c1",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for a wide private network in either TCP or UDP protocol",
+			"description_id": "127a32be",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "59d001745d9b61a8466e2fa4de6e7f0edd5be2dce136795eee243fbe4886733b",
+					"line": 51,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-alb-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[alb].ingress",
+					"search_line": 51,
+					"search_value": "",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "1792fd0a64bc4ea4b0bfc75b9e3b4df931e19c705acf54d4caf277101114afc2",
+					"line": 133,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress]",
+					"search_line": 133,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "380866569c85cd2bcde9960148095c45a4947fd8a788098fd030aba6251af311",
+					"line": 104,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": 104,
+					"search_value": "",
+					"expected_value": "aws_lb has shield advanced associated",
+					"actual_value": "aws_lb does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "706dc92cebabaa55ba301a053b77b506d30b5c8d78ea057a5d9e23c1338c3f00",
+					"line": 190,
+					"resource_type": "aws_flow_log",
+					"resource_name": "wordpress",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{wordpress}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-10-10.tf.rescanned.tf",
+					"similarity_id": "ea24858ddc23e3314e305d1c1c5c4e7c56f970127acd49a2fe1b09130d098f18",
+					"line": 198,
+					"resource_type": "aws_wafv2_web_acl",
+					"resource_name": "wordpress-waf",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafv2_web_acl[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafv2_web_acl[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_wafv2_web_acl[{{wordpress}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

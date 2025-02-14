@@ -1,0 +1,408 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 445,
+	"files_parsed": 1,
+	"lines_parsed": 419,
+	"lines_ignored": 26,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 5,
+		"LOW": 4,
+		"MEDIUM": 6,
+		"TRACE": 0
+	},
+	"total_counter": 15,
+	"total_bom_resources": 0,
+	"start": "2025-02-09T23:41:27.726182461-06:00",
+	"end": "2025-02-09T23:41:33.60231862-06:00",
+	"paths": [
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "ALB Is Not Integrated With WAF",
+			"query_id": "0afa6ab8-a047-48cf-be07-93a2f8c34cf7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All Application Load Balancers (ALB) must be protected with Web Application Firewall (WAF) service",
+			"description_id": "4e4c668d",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "7079fe968e48c3d368db9014f70a2f6872d9171578cab0f70817ec92b4d385d4",
+					"line": 250,
+					"resource_type": "aws_alb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_alb[wordpress_alb]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_alb[wordpress_alb]' should not be 'internal' and has a 'aws_wafregional_web_acl_association' associated",
+					"actual_value": "'aws_alb[wordpress_alb]' is not 'internal' and does not have a 'aws_wafregional_web_acl_association' associated"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Without WAF",
+			"query_id": "1419b4c6-6d5c-4534-9cf6-6a5266085333",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All AWS CloudFront distributions should be integrated with the Web Application Firewall (AWS WAF) service",
+			"description_id": "8fa5ef1b",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "9c5cffc6f25cf59c95b78520c8390d2aecfc154e297d6552abcc482cd477db97",
+					"line": 312,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cloudfront-distribution",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress_cloudfront_distribution].web_acl_id",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'web_acl_id'  should exist",
+					"actual_value": "'web_acl_id' is missing"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "b6fe3cd7964d570aa1cbc9af8b5cd14e9cb9351c1a25dc0c7c2d5a5b4aa5a649",
+					"line": 410,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "wordpress-cloudwatch-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[wordpress_cloudwatch_log_group]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Logging Disabled",
+			"query_id": "7dbba512-e244-42dc-98bb-422339827967",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_query_log",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Check if CloudWatch logging is disabled for Route53 hosted zones",
+			"description_id": "b4a8c275",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "7d93301530cb4520d3174e560a09a800df7d14a567f9d78c7c340d7ef7ed5fbc",
+					"line": 365,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_route53_zone]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_route53_query_log' should be set for respective 'aws_route53_zone'",
+					"actual_value": "'aws_route53_query_log' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "RDS Without Logging",
+			"query_id": "8d7f7b8c-6c7c-40f8-baa6-62006c6c7b56",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#enabled_cloudwatch_logs_exports",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "RDS does not have any kind of logger",
+			"description_id": "c499a58c",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "9add9b8f918040fa85d51a3182b3c81bb8348e59744863cbfd12e21b1ae6081f",
+					"line": 229,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpress-rds",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_rds]",
+					"search_line": 229,
+					"search_value": "",
+					"expected_value": "'enabled_cloudwatch_logs_exports' should be defined",
+					"actual_value": "'enabled_cloudwatch_logs_exports' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "825640228c52190ebc6c664b79410e16b16d396855bf7b2a01f5664d4ceaaf00",
+					"line": 74,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 74,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 74,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Enabled MFA Delete",
+			"query_id": "c5b31ab9-0f26-4a49-b8aa-4cc064392f4d",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#mfa_delete",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "S3 bucket without MFA Delete Enabled. MFA delete cannot be enabled through Terraform, it can be done by adding a MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html) and enabling versioning and MFA delete by using AWS CLI: 'aws s3api put-bucket-versioning --versioning-configuration=Status=Enabled,MFADelete=Enabled --bucket=\u003cBUCKET_NAME\u003e --mfa=\u003cMFA_SERIAL_NUMBER\u003e'. Please, also notice that MFA delete can not be used with lifecycle configurations",
+			"description_id": "e1699d08",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "1178ab72e0ee62c66e231fa8ec1746030b090ec4d85a8659eaf57989c3320e05",
+					"line": 297,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-s3-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[wordpress_s3_bucket].versioning",
+					"search_line": 297,
+					"search_value": "",
+					"expected_value": "'mfa_delete' should be set to true",
+					"actual_value": "'mfa_delete' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "3b611b304d09f92253816f0b90dda05e5e237024c9e193f93a4758e96e3cca43",
+					"line": 365,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_route53_zone]",
+					"search_line": 365,
+					"search_value": "",
+					"expected_value": "aws_route53_zone has shield advanced associated",
+					"actual_value": "aws_route53_zone does not have shield advanced associated"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "0869cf974a52a79075b1eb974152cdcf958c8ed959812eca30873336b8a9fbdc",
+					"line": 312,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cloudfront-distribution",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[wordpress_cloudfront_distribution]",
+					"search_line": 312,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Without Retention Period Specified",
+			"query_id": "ef0b316a-211e-42f1-888e-64efe172b755",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should have retention days specified",
+			"description_id": "64f08509",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "53686a844b753acb99c60c3e377332e1c5412058ee23ccc39ad522df3857ecdf",
+					"line": 410,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "wordpress-cloudwatch-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[wordpress_cloudwatch_log_group]",
+					"search_line": 410,
+					"search_value": "",
+					"expected_value": "Attribute 'retention_in_days' should be set and valid",
+					"actual_value": "Attribute 'retention_in_days' is undefined",
+					"remediation": "retention_in_days = 7",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "e6ca4a6665182351713ea35a73cbfb32479fe66b3a1010cf1ccff4fba7069108",
+					"line": 410,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "wordpress-cloudwatch-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[{{wordpress_cloudwatch_log_group}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudwatch_log_group[{{wordpress_cloudwatch_log_group}}].tags should be defined and not null",
+					"actual_value": "aws_cloudwatch_log_group[{{wordpress_cloudwatch_log_group}}].tags is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "0f34664762a08de23a3abb9ebb19c3b6974bddde2ec483a417299673b4283dcb",
+					"line": 401,
+					"resource_type": "aws_flow_log",
+					"resource_name": "wordpress_vpc_flow_log",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{wordpress_vpc_flow_log}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{wordpress_vpc_flow_log}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{wordpress_vpc_flow_log}}].tags is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Security Group Rule Without Description",
+			"query_id": "68eb4bf3-f9bf-463d-b5cf-e029bb446d2e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#description",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for all rules in AWS Security Group to have a description",
+			"description_id": "cee242dd",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "046b21e608ad34b8d94f7cb1ce6ce9340815720692192ef4acce9c06e88fbd7f",
+					"line": 186,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{wordpress_sg}}].egress",
+					"search_line": 186,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{wordpress_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{wordpress_sg}}].egress description is undefined or null"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-wordpress_2025-01-01_18-33-58.tf.rescanned.tf",
+					"similarity_id": "da3b88adff159660aed555cd4a1d30b0c3de3dbaf0c94654977417616cef353e",
+					"line": 214,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-rds-sg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_security_group[{{wordpress_rds_sg}}].egress",
+					"search_line": 214,
+					"search_value": "",
+					"expected_value": "aws_security_group[{{wordpress_rds_sg}}].egress description should be defined and not null",
+					"actual_value": "aws_security_group[{{wordpress_rds_sg}}].egress description is undefined or null"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,143 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 192,
+	"files_parsed": 1,
+	"lines_parsed": 181,
+	"lines_ignored": 11,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 1,
+		"LOW": 2,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 4,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T07:10:28.188300396-06:00",
+	"end": "2025-02-11T07:11:03.35458276-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-14-50.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-14-50.tf.rescanned.tf",
+					"similarity_id": "617ad5cae7ec8add136f9fdc0a0abffdb51f894d7a5cc4cf17962da9cd35b93a",
+					"line": 167,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/wordpress-flow-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[flow_log]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-14-50.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 25,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-14-50.tf.rescanned.tf",
+					"similarity_id": "42d609687524a8e7bab3738f25ff6ca2865c98ffc9a247883dd363453301b34b",
+					"line": 101,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-alb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[wordpress]",
+					"search_line": 101,
+					"search_value": "",
+					"expected_value": "aws_lb has shield advanced associated",
+					"actual_value": "aws_lb does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-14-50.tf.rescanned.tf",
+					"similarity_id": "ea24858ddc23e3314e305d1c1c5c4e7c56f970127acd49a2fe1b09130d098f18",
+					"line": 132,
+					"resource_type": "aws_wafv2_web_acl",
+					"resource_name": "wordpress-waf",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafv2_web_acl[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafv2_web_acl[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_wafv2_web_acl[{{wordpress}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

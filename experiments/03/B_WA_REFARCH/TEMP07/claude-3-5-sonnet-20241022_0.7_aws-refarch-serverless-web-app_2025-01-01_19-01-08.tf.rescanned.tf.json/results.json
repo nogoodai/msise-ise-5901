@@ -1,0 +1,87 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 206,
+	"files_parsed": 1,
+	"lines_parsed": 198,
+	"lines_ignored": 8,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 1,
+		"INFO": 0,
+		"LOW": 0,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 2,
+	"total_bom_resources": 0,
+	"start": "2025-02-13T08:26:28.741268305-06:00",
+	"end": "2025-02-13T08:26:39.02453804-06:00",
+	"paths": [
+		"/home/lj/kics/assets/queries/",
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-serverless-web-app_2025-01-01_19-01-08.tf.rescanned.tf"
+	],
+	"queries": [
+		{
+			"query_name": "KMS Key With Vulnerable Policy",
+			"query_id": "7ebc9038-0bde-479a-acc4-6ed7b6758899",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "732",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "Checks if the policy is vulnerable and needs updating.",
+			"description_id": "32b2985e",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-serverless-web-app_2025-01-01_19-01-08.tf.rescanned.tf",
+					"similarity_id": "a647ce84c159193a89a5c190374a8f766367fb866d3dca7eae1f0cb01ed60534",
+					"line": 46,
+					"resource_type": "aws_kms_key",
+					"resource_name": "cloudwatch",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_kms_key[cloudwatch]",
+					"search_line": 46,
+					"search_value": "",
+					"expected_value": "aws_kms_key[cloudwatch].policy should be defined and not null",
+					"actual_value": "aws_kms_key[cloudwatch].policy is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-serverless-web-app_2025-01-01_19-01-08.tf.rescanned.tf",
+					"similarity_id": "ae6056a76ba6050bc431b8a9e95b18e9b0ddf5f4c1103af1ab116573f810bdc5",
+					"line": 139,
+					"resource_type": "aws_apigatewayv2_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_apigatewayv2_stage[prod].default_route_settings",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_apigatewayv2_stage[prod].default_route_settings.logging_level should be defined and not null",
+					"actual_value": "aws_apigatewayv2_stage[prod].default_route_settings.logging_level isn't defined or is null"
+				}
+			]
+		}
+	]
+}

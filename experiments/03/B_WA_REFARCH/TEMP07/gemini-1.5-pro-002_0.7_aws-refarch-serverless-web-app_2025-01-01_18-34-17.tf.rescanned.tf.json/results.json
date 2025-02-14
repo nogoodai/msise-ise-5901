@@ -1,0 +1,199 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 272,
+	"files_parsed": 1,
+	"lines_parsed": 272,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 1,
+		"LOW": 1,
+		"MEDIUM": 4,
+		"TRACE": 0
+	},
+	"total_counter": 6,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:10:49.15990637-06:00",
+	"end": "2025-02-03T21:10:59.424644626-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Without Configured Authorizer",
+			"query_id": "0a96ce49-4163-4ee6-8169-eb3b0797d694",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_authorizer",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "API Gateway REST API should have an API Gateway Authorizer",
+			"description_id": "c1eed330",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "fd9658220ac3c37146aebda27060ff7fe5fe96073a3cd35f0b5fac5a305adf42",
+					"line": 120,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo-app-api",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_rest_api[main]",
+					"search_line": 120,
+					"search_value": "",
+					"expected_value": "API Gateway REST API should be associated with an API Gateway Authorizer",
+					"actual_value": "API Gateway REST API is not associated with an API Gateway Authorizer"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "b98c115437a7b3347aa4bf7747e37c5e2bc9dc7df9236d6cfb5efc75a2d82bc2",
+					"line": 231,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/apigateway/${aws_api_gateway_rest_api.main.name}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Logging Disabled",
+			"query_id": "f861041c-8c9f-4156-acfc-5e6e524f5884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Server Access Logging should be enabled on S3 Buckets so that all changes are logged and trackable",
+			"description_id": "fa5c7c72",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "e492b0ae5844da6fcb59152e8808d4649e4cf3c33bdd07dfe0c1973145b2f98f",
+					"line": 135,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "todo-app-app-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[main]",
+					"search_line": 135,
+					"search_value": "",
+					"expected_value": "'logging' should be defined and not null",
+					"actual_value": "'logging' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Versioning",
+			"query_id": "568a4d22-3517-44a6-a7ad-6a7eed88722c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "S3 bucket should have versioning enabled",
+			"description_id": "7614ce3b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "2e21b59f1d5d7e6c9b9cabd487e207b2d51f8074c1a237981bad2a92d3699277",
+					"line": 135,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "todo-app-app-bucket",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[main]",
+					"search_line": 135,
+					"search_value": "",
+					"expected_value": "'versioning' should be true",
+					"actual_value": "'versioning' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 45,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is set to 'OFF'"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-17.tf.rescanned.tf",
+					"similarity_id": "f29676a771cccc3afdbbb836edc0c43d439c33c9c659d4ed2f016021b72d02ef",
+					"line": 231,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/apigateway/${aws_api_gateway_rest_api.main.name}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[{{api_gateway}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudwatch_log_group[{{api_gateway}}].tags should be defined and not null",
+					"actual_value": "aws_cloudwatch_log_group[{{api_gateway}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

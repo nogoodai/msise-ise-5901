@@ -1,0 +1,173 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 371,
+	"files_parsed": 1,
+	"lines_parsed": 371,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 2,
+		"LOW": 1,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 5,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:41:13.174270893-06:00",
+	"end": "2025-02-03T21:41:23.464221862-06:00",
+	"paths": [
+		"gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+					"similarity_id": "ae6056a76ba6050bc431b8a9e95b18e9b0ddf5f4c1103af1ab116573f810bdc5",
+					"line": 129,
+					"resource_type": "aws_apigatewayv2_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_apigatewayv2_stage[prod].default_route_settings",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_apigatewayv2_stage[prod].default_route_settings.logging_level should be defined and not null",
+					"actual_value": "aws_apigatewayv2_stage[prod].default_route_settings.logging_level isn't defined or is null"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+					"similarity_id": "3242d12f2c5ed8396a1585e5ec7fb705fb6ad93669498dbdb0b9db4db7d74282",
+					"line": 158,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/apigateway/my-app-stack-access-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway_access_logs]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+					"similarity_id": "89663f273f52f8740ab730e7e6c6258232c4c41ab7cd3d3713b46efbc401cfdb",
+					"line": 28,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-app-stack-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[user_pool]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[user_pool] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[user_pool] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Without Retention Period Specified",
+			"query_id": "ef0b316a-211e-42f1-888e-64efe172b755",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should have retention days specified",
+			"description_id": "64f08509",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+					"similarity_id": "1318a7cb7689cc4ba711f0eaee0c5de5641ce0aff05694c7e728004d668c4024",
+					"line": 158,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/apigateway/my-app-stack-access-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway_access_logs]",
+					"search_line": 158,
+					"search_value": "",
+					"expected_value": "Attribute 'retention_in_days' should be set and valid",
+					"actual_value": "Attribute 'retention_in_days' is undefined",
+					"remediation": "retention_in_days = 7",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_19-02-49.tf.rescanned.tf",
+					"similarity_id": "45d1d7a8a56bff07ae3bc8af517f3e7ca78c6682d98514372332709d9af45742",
+					"line": 347,
+					"resource_type": "aws_accessanalyzer_analyzer",
+					"resource_name": "example",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_accessanalyzer_analyzer[{{example}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_accessanalyzer_analyzer[{{example}}].tags should be defined and not null",
+					"actual_value": "aws_accessanalyzer_analyzer[{{example}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

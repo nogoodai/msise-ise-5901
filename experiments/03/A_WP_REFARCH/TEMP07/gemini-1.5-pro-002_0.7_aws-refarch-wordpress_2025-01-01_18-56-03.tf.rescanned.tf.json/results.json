@@ -1,0 +1,337 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 511,
+	"files_parsed": 1,
+	"lines_parsed": 492,
+	"lines_ignored": 19,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 2,
+		"INFO": 2,
+		"LOW": 4,
+		"MEDIUM": 4,
+		"TRACE": 0
+	},
+	"total_counter": 12,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:16:56.39186353-06:00",
+	"end": "2025-02-03T21:17:06.491996114-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "Sensitive Port Is Exposed To Entire Network",
+			"query_id": "381c3f2a-ef6f-4eff-99f7-b169cda3422c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for the whole network in either TCP or UDP protocol",
+			"description_id": "5be78364",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "9aaa2f1a6ff7e9577d26e33af5065cf665ee4a5351c0f7974f1d1932f4c547d6",
+					"line": 129,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-project-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,443",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Unrestricted Security Group Ingress",
+			"query_id": "4728cd65-a20c-49da-8b31-9c08b423e4db",
+			"query_url": "https://www.terraform.io/docs/providers/aws/r/security_group.html",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "668",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Security groups allow ingress from 0.0.0.0:0 and/or ::/0",
+			"description_id": "ce3ee5e0",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "1bdd4e87765137a6c1f92cc3b1239cea039f9d523ecc39922f350c4696896db2",
+					"line": 133,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-project-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg]",
+					"search_line": 133,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				}
+			]
+		},
+		{
+			"query_name": "ALB Is Not Integrated With WAF",
+			"query_id": "0afa6ab8-a047-48cf-be07-93a2f8c34cf7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All Application Load Balancers (ALB) must be protected with Web Application Firewall (WAF) service",
+			"description_id": "4e4c668d",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "e61b1c9336bd1a0801d1bc44ee9daafbbbf8c00bdb1a1d534477b0b0b56d90a7",
+					"line": 275,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-project-web-lb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[web_lb]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_lb[web_lb]' should not be 'internal' and has a 'aws_wafregional_web_acl_association' associated",
+					"actual_value": "'aws_lb[web_lb]' is not 'internal' and does not have a 'aws_wafregional_web_acl_association' associated"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Without WAF",
+			"query_id": "1419b4c6-6d5c-4534-9cf6-6a5266085333",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All AWS CloudFront distributions should be integrated with the Web Application Firewall (AWS WAF) service",
+			"description_id": "8fa5ef1b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "1ed99a0b6caa88099f503ea82c8db7ff61e7fc30b1a59f8b8d4f59684a4501b2",
+					"line": 414,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-project-cloudfront",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[s3_distribution].web_acl_id",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'web_acl_id'  should exist",
+					"actual_value": "'web_acl_id' is missing"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "8915e422e5b163dbbd9b71acc3d17252c9320a6f52f3b94471adfdc22f74e077",
+					"line": 60,
+					"resource_type": "aws_vpc",
+					"resource_name": "main",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[main]",
+					"search_line": 60,
+					"search_value": "",
+					"expected_value": "aws_vpc[main] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[main] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "9d3e8ffaca83144582372d172b612e96424672be660209a6466c76b79895bdc3",
+					"line": 60,
+					"resource_type": "aws_vpc",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[main]",
+					"search_line": 60,
+					"search_value": "",
+					"expected_value": "aws_vpc[main] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[main] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 60,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Enabled MFA Delete",
+			"query_id": "c5b31ab9-0f26-4a49-b8aa-4cc064392f4d",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#mfa_delete",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "S3 bucket without MFA Delete Enabled. MFA delete cannot be enabled through Terraform, it can be done by adding a MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html) and enabling versioning and MFA delete by using AWS CLI: 'aws s3api put-bucket-versioning --versioning-configuration=Status=Enabled,MFADelete=Enabled --bucket=\u003cBUCKET_NAME\u003e --mfa=\u003cMFA_SERIAL_NUMBER\u003e'. Please, also notice that MFA delete can not be used with lifecycle configurations",
+			"description_id": "e1699d08",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "c338ee4547ba8efae4d52269fede5db2f24ca1b731f56ff479fd2060f4097687",
+					"line": 394,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-project-static-assets",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[static_assets].versioning",
+					"search_line": 394,
+					"search_value": "",
+					"expected_value": "'mfa_delete' should be set to true",
+					"actual_value": "'mfa_delete' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "c2f3d2cee3bc067b934136d58fa4437987d5ffb6c77352f0980571affb84ec92",
+					"line": 414,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-project-cloudfront",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[s3_distribution]",
+					"search_line": 414,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "8a3c858b8fffd64d84c74d0f19c2e55dbc7db627c2ddc75a223f4b798f75714d",
+					"line": 275,
+					"resource_type": "aws_lb",
+					"resource_name": "wordpress-project-web-lb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_lb[web_lb]",
+					"search_line": 275,
+					"search_value": "",
+					"expected_value": "aws_lb has shield advanced associated",
+					"actual_value": "aws_lb does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "ad0d2f01488b6a8988b3c3171408d77410b759aefbc01a70734662898cb6a550",
+					"line": 358,
+					"resource_type": "aws_launch_template",
+					"resource_name": "wordpress-project-launch-template",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_launch_template[{{web}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_launch_template[{{web}}].tags should be defined and not null",
+					"actual_value": "aws_launch_template[{{web}}].tags is undefined or null"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_18-56-03.tf.rescanned.tf",
+					"similarity_id": "ba261a68451887e21f09f8be00392026b1766fc12a903ab1bd6b885e6f32fcb3",
+					"line": 333,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "wordpress-project-web-asg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_autoscaling_group[{{web_asg}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_autoscaling_group[{{web_asg}}].tags should be defined and not null",
+					"actual_value": "aws_autoscaling_group[{{web_asg}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

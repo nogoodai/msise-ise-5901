@@ -1,0 +1,238 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 236,
+	"files_parsed": 1,
+	"lines_parsed": 226,
+	"lines_ignored": 10,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 2,
+		"INFO": 4,
+		"LOW": 2,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 9,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T06:52:01.0904321-06:00",
+	"end": "2025-02-11T06:52:36.054135353-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "Sensitive Port Is Exposed To Entire Network",
+			"query_id": "381c3f2a-ef6f-4eff-99f7-b169cda3422c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for the whole network in either TCP or UDP protocol",
+			"description_id": "5be78364",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "6fa590b163b57e3ea3f5f2112f93b3fa815161ea42c299973439d998b31176a6",
+					"line": 140,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-alb-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[alb].ingress",
+					"search_line": -1,
+					"search_value": "TCP,443",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Unrestricted Security Group Ingress",
+			"query_id": "4728cd65-a20c-49da-8b31-9c08b423e4db",
+			"query_url": "https://www.terraform.io/docs/providers/aws/r/security_group.html",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "668",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Security groups allow ingress from 0.0.0.0:0 and/or ::/0",
+			"description_id": "ce3ee5e0",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "8f0a1ec3e2bfcee7f4f70ee9f73d0b91fcf654472ed5eca3c0bfabefc2d8afbc",
+					"line": 145,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-alb-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[alb].ingress.cidr_blocks",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "5a17c9c6b0fbc52a68d0864a81cb0d83bb3d503c548d26f3091ea732b8e880e2",
+					"line": 65,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/wordpress-flow-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[vpc_flow_log]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 24,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Enabled MFA Delete",
+			"query_id": "c5b31ab9-0f26-4a49-b8aa-4cc064392f4d",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#mfa_delete",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "S3 bucket without MFA Delete Enabled. MFA delete cannot be enabled through Terraform, it can be done by adding a MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html) and enabling versioning and MFA delete by using AWS CLI: 'aws s3api put-bucket-versioning --versioning-configuration=Status=Enabled,MFADelete=Enabled --bucket=\u003cBUCKET_NAME\u003e --mfa=\u003cMFA_SERIAL_NUMBER\u003e'. Please, also notice that MFA delete can not be used with lifecycle configurations",
+			"description_id": "e1699d08",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "cdac31a16c1c3d1062c5e0392c4f037d9fe459c4e61423912141a57524d4ea10",
+					"line": 174,
+					"resource_type": "aws_s3_bucket_versioning",
+					"resource_name": "wordpress_assets",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket_versioning[wordpress_assets].versioning_configuration",
+					"search_line": 174,
+					"search_value": "",
+					"expected_value": "'versioning_configuration.mfa_delete' should be defined and not null",
+					"actual_value": "'versioning_configuration.mfa_delete' is undefined and not null"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "86598431211fa121eff161f47dc8cb47f79442acc0e4b16b169c67d61cd4da93",
+					"line": 187,
+					"resource_type": "aws_wafregional_web_acl",
+					"resource_name": "wordpress-waf",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafregional_web_acl[{{wordpress}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafregional_web_acl[{{wordpress}}].tags should be defined and not null",
+					"actual_value": "aws_wafregional_web_acl[{{wordpress}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "f2b7b1d5b1f1e9acdb970f287aaaed6e00f877aeda4db4e43defdee037b6e7d2",
+					"line": 211,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-alb-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{alb}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{alb}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{alb}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "471993a1327d951fb30532f482a8e47d054aa7c8939b1157ea93ad05816d4bb6",
+					"line": 216,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-cloudfront-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{cloudfront}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{cloudfront}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{cloudfront}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_18-58-30.tf.rescanned.tf",
+					"similarity_id": "2be9b25187f18ac78fea3f77eeb61d95da2c3a5e1300806b3b820e95092c48c2",
+					"line": 58,
+					"resource_type": "aws_flow_log",
+					"resource_name": "vpc_flow_log",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{vpc_flow_log}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{vpc_flow_log}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{vpc_flow_log}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

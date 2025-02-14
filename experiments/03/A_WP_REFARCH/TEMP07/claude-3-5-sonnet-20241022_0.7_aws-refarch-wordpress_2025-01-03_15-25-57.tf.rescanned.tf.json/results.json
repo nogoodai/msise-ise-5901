@@ -1,0 +1,195 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 176,
+	"files_parsed": 1,
+	"lines_parsed": 161,
+	"lines_ignored": 15,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 6,
+		"LOW": 3,
+		"MEDIUM": 0,
+		"TRACE": 0
+	},
+	"total_counter": 9,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T07:20:37.025052869-06:00",
+	"end": "2025-02-11T07:21:12.228273801-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "CDN Configuration Is Missing",
+			"query_id": "1bc367f6-901d-4870-ad0c-71d79762ef52",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "Content Delivery Network (CDN) service is used within an AWS account to secure and accelerate the delivery of websites. The use of a CDN can provide a layer of security between your origin content and the destination.",
+			"description_id": "1b311401",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "64e6e20abadb60d08e3bc3ff9eb5e390c745af87415a1d313500ecd773a0b7f6",
+					"line": 128,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_cloudfront_distribution[main]",
+					"search_line": 128,
+					"search_value": "",
+					"expected_value": "resource.aws_cloudfront_distribution[main].enabled should be set to 'true'",
+					"actual_value": "resource.aws_cloudfront_distribution[main].enabled is not defined",
+					"remediation": "enabled = true",
+					"remediation_type": "addition"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "64e6e20abadb60d08e3bc3ff9eb5e390c745af87415a1d313500ecd773a0b7f6",
+					"line": 128,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource.aws_cloudfront_distribution[main]",
+					"search_line": 128,
+					"search_value": "",
+					"expected_value": "resource.aws_cloudfront_distribution[main].origin should be defined",
+					"actual_value": "resource.aws_cloudfront_distribution[main].origin is not defined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 5,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "1939deade5759f794e350f0f1eb31debb5e640841ac9673fa0313dbd962df503",
+					"line": 83,
+					"resource_type": "aws_wafv2_web_acl",
+					"resource_name": "wordpress-waf",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafv2_web_acl[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafv2_web_acl[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_wafv2_web_acl[{{main}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "22ff37cc8d4bf15933aaeeb2510b8ffaef46b565bbf0c50ac82ffc22fc5d05ac",
+					"line": 128,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_cloudfront_distribution[{{main}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "7c2709495c747e4c82a98657c3fbd5d68902f3950af64a4212db3db999337f0d",
+					"line": 168,
+					"resource_type": "aws_networkfirewall_firewall",
+					"resource_name": "wordpress-firewall",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_networkfirewall_firewall[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_networkfirewall_firewall[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_networkfirewall_firewall[{{main}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "f2b7b1d5b1f1e9acdb970f287aaaed6e00f877aeda4db4e43defdee037b6e7d2",
+					"line": 149,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-alb-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{alb}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{alb}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{alb}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "471993a1327d951fb30532f482a8e47d054aa7c8939b1157ea93ad05816d4bb6",
+					"line": 154,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-cloudfront-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{cloudfront}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{cloudfront}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{cloudfront}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-03_15-25-57.tf.rescanned.tf",
+					"similarity_id": "1ebbb50958ae443f5dd80f0b77fcdf5c2d8ad674d1fab49b3669eadeb8e822f2",
+					"line": 160,
+					"resource_type": "aws_flow_log",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{main}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

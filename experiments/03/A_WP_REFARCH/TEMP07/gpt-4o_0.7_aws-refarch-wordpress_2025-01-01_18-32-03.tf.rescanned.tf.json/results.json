@@ -1,0 +1,494 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 434,
+	"files_parsed": 1,
+	"lines_parsed": 434,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 4,
+		"INFO": 2,
+		"LOW": 5,
+		"MEDIUM": 7,
+		"TRACE": 0
+	},
+	"total_counter": 18,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:28:06.698874703-06:00",
+	"end": "2025-02-03T21:28:17.002406978-06:00",
+	"paths": [
+		"/home/lj/kics/assets/queries/",
+		"gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf"
+	],
+	"queries": [
+		{
+			"query_name": "Sensitive Port Is Exposed To Entire Network",
+			"query_id": "381c3f2a-ef6f-4eff-99f7-b169cda3422c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "A sensitive port, such as port 23 or port 110, is open for the whole network in either TCP or UDP protocol",
+			"description_id": "5be78364",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "e3bdc386522934cc5bd55507b9d69b9416d9e67cfb23ddbc3d4724c19b4d8bd2",
+					"line": 128,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,80",
+					"expected_value": "HTTP (TCP:80) should not be allowed",
+					"actual_value": "HTTP (TCP:80) is allowed"
+				},
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "9aaa2f1a6ff7e9577d26e33af5065cf665ee4a5351c0f7974f1d1932f4c547d6",
+					"line": 128,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg].ingress",
+					"search_line": -1,
+					"search_value": "TCP,443",
+					"expected_value": "HTTPS (TCP:443) should not be allowed",
+					"actual_value": "HTTPS (TCP:443) is allowed"
+				}
+			]
+		},
+		{
+			"query_name": "Unrestricted Security Group Ingress",
+			"query_id": "4728cd65-a20c-49da-8b31-9c08b423e4db",
+			"query_url": "https://www.terraform.io/docs/providers/aws/r/security_group.html",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "668",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "Security groups allow ingress from 0.0.0.0:0 and/or ::/0",
+			"description_id": "ce3ee5e0",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "30ffc2519043f2f78cae9c4c077add2f8e2111852feffc07c074632daf65e0a8",
+					"line": 132,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg]",
+					"search_line": 132,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				},
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "95336bdebee8b88a0f8ee3d2814c289cf31e71cf6f2d69bd0e84233945061d20",
+					"line": 139,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg]",
+					"search_line": 139,
+					"search_value": "",
+					"expected_value": "One of 'ingress.cidr_blocks' not equal '0.0.0.0/0'",
+					"actual_value": "One of 'ingress.cidr_blocks' equal '0.0.0.0/0'"
+				}
+			]
+		},
+		{
+			"query_name": "CloudFront Without WAF",
+			"query_id": "1419b4c6-6d5c-4534-9cf6-6a5266085333",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "All AWS CloudFront distributions should be integrated with the Web Application Firewall (AWS WAF) service",
+			"description_id": "8fa5ef1b",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "a0720006f4459a5042f4ecd870b65bfe1331ce6621604b2f92d1c441972b109f",
+					"line": 312,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[cdn].web_acl_id",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'web_acl_id'  should exist",
+					"actual_value": "'web_acl_id' is missing"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Logging Disabled",
+			"query_id": "7dbba512-e244-42dc-98bb-422339827967",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_query_log",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Check if CloudWatch logging is disabled for Route53 hosted zones",
+			"description_id": "b4a8c275",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "ec25db51e22630ef6a106880f830882aa22a292b532fa457537f37fd3b4bc07a",
+					"line": 370,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_zone]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_route53_query_log' should be set for respective 'aws_route53_zone'",
+					"actual_value": "'aws_route53_query_log' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Instance Has Public IP",
+			"query_id": "5a2486aa-facf-477d-a5c1-b010789459ce",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#associate_public_ip_address",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "200",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "EC2 Instance should not have a public IP address.",
+			"description_id": "c6f1d1f4",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "0c4503e0c53535a1960183133dda7091878dcf0b24082749cbee9f262aeba3d6",
+					"line": 186,
+					"resource_type": "aws_instance",
+					"resource_name": "wordpress-bastion",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_instance.bastion.associate_public_ip_address",
+					"search_line": 186,
+					"search_value": "",
+					"expected_value": "'associate_public_ip_address' should be set to false",
+					"actual_value": "'associate_public_ip_address' is true"
+				}
+			]
+		},
+		{
+			"query_name": "HTTP Port Open To Internet",
+			"query_id": "ffac8a12-322e-42c1-b9b9-81ff85c39ef7",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "319",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "The HTTP port is open to the internet in a Security Group",
+			"description_id": "a829609b",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "f786e058af1487dffeb42ba0f50ebd4f7ea78c1378f3b8d0afe919fdb61a6725",
+					"line": 125,
+					"resource_type": "aws_security_group",
+					"resource_name": "wordpress-web-sg",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_security_group[web_sg]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_security_group.ingress shouldn't open the HTTP port (80)",
+					"actual_value": "aws_security_group.ingress opens the HTTP port (80)"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Database Auth Not Enabled",
+			"query_id": "88fd05e0-ac0e-43d2-ba6d-fc0ba60ae1a6",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#iam_database_authentication_enabled",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "IAM Database Auth Enabled should be configured to true when using compatible engine and version",
+			"description_id": "12b1c8aa",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "70fd3b70de13466d38fabe6a4d54cb8abb708667c86d70507f6dd4dc7b569633",
+					"line": 271,
+					"resource_type": "aws_db_instance",
+					"resource_name": "wordpressdb",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_db_instance[wordpress_db]",
+					"search_line": 271,
+					"search_value": "",
+					"expected_value": "'iam_database_authentication_enabled' should be set to true",
+					"actual_value": "'iam_database_authentication_enabled' is undefined or null",
+					"remediation": "iam_database_authentication_enabled = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "VPC FlowLogs Disabled",
+			"query_id": "f83121ea-03da-434f-9277-9cd247ab3047",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Every VPC resource should have an associated Flow Log",
+			"description_id": "cdbdeb30",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "aad2eb3f262198e14b46ca457afb36c47c2e6e1a7a55bd0389a8d80dbdee9b2b",
+					"line": 66,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 66,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] should be the same as Flow Logs VPC id",
+					"actual_value": "aws_vpc[wordpress_vpc] is not the same as Flow Logs VPC id"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "bc691083d945c46e536c36b3fa840929e85b217b9317756274135a0382f2275f",
+					"line": 66,
+					"resource_type": "aws_vpc",
+					"resource_name": "wordpress_vpc",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[wordpress_vpc]",
+					"search_line": 66,
+					"search_value": "",
+					"expected_value": "aws_vpc[wordpress_vpc] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[wordpress_vpc] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 66,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Instance With No VPC",
+			"query_id": "a31a5a29-718a-4ff4-8001-a69e5e4d029e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "EC2 Instances should be configured under a VPC network. AWS VPCs provide the controls to facilitate a formal process for approving and testing all network connections and changes to the firewall and router configurations.",
+			"description_id": "225a9f30",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "6ea2a810a09c340c4ff8bde9a4a0f53efadfca01f08732c885b38751a70f4f94",
+					"line": 180,
+					"resource_type": "aws_instance",
+					"resource_name": "wordpress-bastion",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance[bastion]",
+					"search_line": 180,
+					"search_value": "",
+					"expected_value": "Attribute 'vpc_security_group_ids' should be defined and not null",
+					"actual_value": "Attribute 'vpc_security_group_ids' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Enabled MFA Delete",
+			"query_id": "c5b31ab9-0f26-4a49-b8aa-4cc064392f4d",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#mfa_delete",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "S3 bucket without MFA Delete Enabled. MFA delete cannot be enabled through Terraform, it can be done by adding a MFA device (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable.html) and enabling versioning and MFA delete by using AWS CLI: 'aws s3api put-bucket-versioning --versioning-configuration=Status=Enabled,MFADelete=Enabled --bucket=\u003cBUCKET_NAME\u003e --mfa=\u003cMFA_SERIAL_NUMBER\u003e'. Please, also notice that MFA delete can not be used with lifecycle configurations",
+			"description_id": "e1699d08",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "caa1c6bd4e322a3cf68538a7c707c39f020ec6c25325b282486fa0d7df1ac5e8",
+					"line": 293,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-assets-${random_id.bucket_id.hex}",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[assets].versioning",
+					"search_line": 293,
+					"search_value": "",
+					"expected_value": "'mfa_delete' should be set to true",
+					"actual_value": "'mfa_delete' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "Shield Advanced Not In Use",
+			"query_id": "084c6686-2a70-4710-91b1-000393e54c12",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/shield_protection#resource_arn",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "AWS Shield Advanced should be used for Amazon Route 53 hosted zone, AWS Global Accelerator accelerator, Elastic IP Address, Elastic Load Balancing, and Amazon CloudFront Distribution to protect these resources against robust DDoS attacks",
+			"description_id": "e09b31c7",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "4ef7ab6cf6323d6a4a0608f095bae1ff5b13896767d673c7e5bbadfe106e3316",
+					"line": 370,
+					"resource_type": "aws_route53_zone",
+					"resource_name": "example.com",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_route53_zone[wordpress_zone]",
+					"search_line": 370,
+					"search_value": "",
+					"expected_value": "aws_route53_zone has shield advanced associated",
+					"actual_value": "aws_route53_zone does not have shield advanced associated"
+				},
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "0869cf974a52a79075b1eb974152cdcf958c8ed959812eca30873336b8a9fbdc",
+					"line": 312,
+					"resource_type": "aws_cloudfront_distribution",
+					"resource_name": "wordpress-cdn",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudfront_distribution[cdn]",
+					"search_line": 312,
+					"search_value": "",
+					"expected_value": "aws_cloudfront_distribution has shield advanced associated",
+					"actual_value": "aws_cloudfront_distribution does not have shield advanced associated"
+				}
+			]
+		},
+		{
+			"query_name": "EC2 Not EBS Optimized",
+			"query_id": "60224630-175a-472a-9e23-133827040766",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs_optimized",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "It's considered a best practice for an EC2 instance to use an EBS optimized instance. This provides the best performance for your EBS volumes by minimizing contention between Amazon EBS I/O and other traffic from your instance",
+			"description_id": "ddce4bd9",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "34bcb3d8f1d01884ca66a3ac6297ea74bf5fb11ad75ca37c54b2c72b0e499d30",
+					"line": 180,
+					"resource_type": "aws_instance",
+					"resource_name": "wordpress-bastion",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_instance[{{bastion}}]",
+					"search_line": 180,
+					"search_value": "",
+					"expected_value": "'ebs_optimized' should be set to true",
+					"actual_value": "'ebs_optimized' is undefined or null",
+					"remediation": "ebs_optimized = true",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-wordpress_2025-01-01_18-32-03.tf.rescanned.tf",
+					"similarity_id": "0f7ba1fca1df9acdf148b37c65e4fe69940a5db5db104938ce1831d871c4c437",
+					"line": 247,
+					"resource_type": "aws_autoscaling_group",
+					"resource_name": "wordpress_asg",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_autoscaling_group[{{wordpress_asg}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_autoscaling_group[{{wordpress_asg}}].tags should be defined and not null",
+					"actual_value": "aws_autoscaling_group[{{wordpress_asg}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

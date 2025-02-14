@@ -1,0 +1,126 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 222,
+	"files_parsed": 1,
+	"lines_parsed": 222,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 1,
+		"INFO": 2,
+		"LOW": 1,
+		"MEDIUM": 0,
+		"TRACE": 0
+	},
+	"total_counter": 4,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:12:32.983105073-06:00",
+	"end": "2025-02-03T21:12:43.088204102-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-40-11.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "Passwords And Secrets - Generic Token",
+			"query_id": "baee238e-1921-4801-9c3f-79ae1d7b2cbc",
+			"query_url": "https://docs.kics.io/latest/secrets/",
+			"severity": "HIGH",
+			"platform": "Common",
+			"cwe": "798",
+			"cloud_provider": "COMMON",
+			"category": "Secret Management",
+			"experimental": false,
+			"description": "Query to find passwords and secrets in infrastructure code.",
+			"description_id": "d69d8a89",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-40-11.tf.rescanned.tf",
+					"similarity_id": "3c7d2401e4a1b3f9d312b389966353424a5b646971caeced6354e9c09d9d9814",
+					"line": 154,
+					"issue_type": "RedundantAttribute",
+					"search_key": "",
+					"search_line": 0,
+					"search_value": "",
+					"expected_value": "Hardcoded secret key should not appear in source",
+					"actual_value": "Hardcoded secret key appears in source"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-40-11.tf.rescanned.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 43,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool-todo-app",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is set to 'OFF'"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-40-11.tf.rescanned.tf",
+					"similarity_id": "c0381d1e6c5eb36b609a7ad750e5c9d9d8e7239c92ff83196c403c94321cf344",
+					"line": 193,
+					"resource_type": "aws_accessanalyzer_analyzer",
+					"resource_name": "access-analyzer-todo-app",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_accessanalyzer_analyzer[{{analyzer}}].tags",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_accessanalyzer_analyzer[{{analyzer}}].tags has additional tags defined other than 'Name'",
+					"actual_value": "aws_accessanalyzer_analyzer[{{analyzer}}].tags does not have additional tags defined other than 'Name'"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-40-11.tf.rescanned.tf",
+					"similarity_id": "12074f01ef4f39ab7eba15733e795314839c8cf1c1ca37bcc60373b007df2507",
+					"line": 179,
+					"resource_type": "aws_iam_role",
+					"resource_name": "api_gateway_cloudwatch_role_todo-app",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_iam_role[{{api_gateway_cloudwatch_role}}].tags",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_iam_role[{{api_gateway_cloudwatch_role}}].tags has additional tags defined other than 'Name'",
+					"actual_value": "aws_iam_role[{{api_gateway_cloudwatch_role}}].tags does not have additional tags defined other than 'Name'"
+				}
+			]
+		}
+	]
+}

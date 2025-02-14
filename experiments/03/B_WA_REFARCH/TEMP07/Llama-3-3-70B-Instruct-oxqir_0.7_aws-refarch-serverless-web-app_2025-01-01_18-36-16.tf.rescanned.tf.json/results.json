@@ -1,0 +1,173 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 542,
+	"files_parsed": 1,
+	"lines_parsed": 531,
+	"lines_ignored": 11,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 1,
+		"LOW": 3,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 5,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:43:48.659740128-06:00",
+	"end": "2025-02-03T21:43:58.908171977-06:00",
+	"paths": [
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+					"similarity_id": "be2685036b2a4498a97632730d00a91ba62ee3eba6c48d113c93f196a1dd159b",
+					"line": 228,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "this",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_deployment[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[this] has a 'aws_api_gateway_stage' resource associated",
+					"actual_value": "aws_api_gateway_deployment[this] doesn't have a 'aws_api_gateway_stage' resource associated"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without API Gateway UsagePlan Associated",
+			"query_id": "b3a59b8e-94a3-403e-b6e2-527abaf12034",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have API Gateway UsagePlan defined and associated.",
+			"description_id": "a5480b6e",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+					"similarity_id": "c946451af5be8d41d75f30fbb40a746189b2128eda4b4aa67f22211ee4799648",
+					"line": 228,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "this",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[this]",
+					"search_line": 228,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[this] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_deployment[this] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With Invalid Compression",
+			"query_id": "ed35928e-195c-4405-a252-98ccb664ab7b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "API Gateway should have valid compression, which means attribute 'minimum_compression_size' should be set and its value should be greater than -1 and smaller than 10485760.",
+			"description_id": "fc02b8db",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+					"similarity_id": "dc3c65db450a57ec9f0753afb0a33e4ff2a246a1979254b0a26e25431c29a6df",
+					"line": 115,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo-app-api",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_rest_api[this]",
+					"search_line": 115,
+					"search_value": "",
+					"expected_value": "Attribute 'minimum_compression_size' should be set and have a value greater than -1 and smaller than 10485760",
+					"actual_value": "Attribute 'minimum_compression_size' is undefined",
+					"remediation": "minimum_compression_size = 0",
+					"remediation_type": "addition"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+					"similarity_id": "2af233994353e1d642d3d8bf36e54ee4befb1d7cc1dca1c328e1345bff188e26",
+					"line": 38,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[this].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[this].mfa_configuration is set to 'OFF'"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_18-36-16.tf.rescanned.tf",
+					"similarity_id": "20a04eb898214d770d09e5141e6d93a01badd925e602dfee1343725222caeb24",
+					"line": 234,
+					"resource_type": "aws_api_gateway_usage_plan",
+					"resource_name": "todo-app-usage-plan",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_usage_plan[{{this}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_usage_plan[{{this}}].tags should be defined and not null",
+					"actual_value": "aws_api_gateway_usage_plan[{{this}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

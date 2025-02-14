@@ -1,0 +1,143 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 533,
+	"files_parsed": 1,
+	"lines_parsed": 524,
+	"lines_ignored": 9,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 3,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 4,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:46:03.598427909-06:00",
+	"end": "2025-02-03T21:46:13.891146897-06:00",
+	"paths": [
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-00-07.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-00-07.tf.rescanned.tf",
+					"similarity_id": "b0d9b209fc373b7bdfab437a844724122a45050136195320e94077a769e49048",
+					"line": 129,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "todo_deployment",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_deployment[todo_deployment]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[todo_deployment] has a 'aws_api_gateway_stage' resource associated",
+					"actual_value": "aws_api_gateway_deployment[todo_deployment] doesn't have a 'aws_api_gateway_stage' resource associated"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without API Gateway UsagePlan Associated",
+			"query_id": "b3a59b8e-94a3-403e-b6e2-527abaf12034",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have API Gateway UsagePlan defined and associated.",
+			"description_id": "a5480b6e",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-00-07.tf.rescanned.tf",
+					"similarity_id": "d2fac55193eb1ced11eb840f3db649764d7dc179d1b0607f25054615aa7e8703",
+					"line": 129,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "todo_deployment",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[todo_deployment]",
+					"search_line": 129,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[todo_deployment] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_deployment[todo_deployment] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-00-07.tf.rescanned.tf",
+					"similarity_id": "89663f273f52f8740ab730e7e6c6258232c4c41ab7cd3d3713b46efbc401cfdb",
+					"line": 7,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[user_pool]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[user_pool].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[user_pool].mfa_configuration is set to 'OFF'"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-00-07.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 7,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		}
+	]
+}

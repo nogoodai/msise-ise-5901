@@ -1,0 +1,87 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 248,
+	"files_parsed": 1,
+	"lines_parsed": 248,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 2,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:12:01.678351884-06:00",
+	"end": "2025-02-03T21:12:11.983928871-06:00",
+	"paths": [
+		"/home/lj/kics/assets/queries/",
+		"gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-38-50.tf.rescanned.tf"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Without Configured Authorizer",
+			"query_id": "0a96ce49-4163-4ee6-8169-eb3b0797d694",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_authorizer",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "API Gateway REST API should have an API Gateway Authorizer",
+			"description_id": "c1eed330",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-38-50.tf.rescanned.tf",
+					"similarity_id": "3ff17b93dce895688320b01383191091e38fa94bf60aae95354fca0a1042474d",
+					"line": 128,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "todo-app-api-todo-app",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_rest_api[main]",
+					"search_line": 128,
+					"search_value": "",
+					"expected_value": "API Gateway REST API should be associated with an API Gateway Authorizer",
+					"actual_value": "API Gateway REST API is not associated with an API Gateway Authorizer"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-serverless-web-app_2025-01-01_18-38-50.tf.rescanned.tf",
+					"similarity_id": "700b568816b26b1e53441fc229fb0ada8e429bd96640fcc97c4f88d4c1320d8f",
+					"line": 53,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "todo-app-user-pool-todo-app",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_cognito_user_pool[main]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[main].mfa_configuration should be set to 'ON' or 'OPTIONAL",
+					"actual_value": "aws_cognito_user_pool[main].mfa_configuration is set to 'OFF'"
+				}
+			]
+		}
+	]
+}

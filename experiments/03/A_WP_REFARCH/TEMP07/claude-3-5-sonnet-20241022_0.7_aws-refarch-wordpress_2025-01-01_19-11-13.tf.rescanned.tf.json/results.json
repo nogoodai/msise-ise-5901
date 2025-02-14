@@ -1,0 +1,139 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 244,
+	"files_parsed": 1,
+	"lines_parsed": 235,
+	"lines_ignored": 9,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 5,
+		"LOW": 0,
+		"MEDIUM": 1,
+		"TRACE": 0
+	},
+	"total_counter": 6,
+	"total_bom_resources": 0,
+	"start": "2025-02-11T07:06:18.282827208-06:00",
+	"end": "2025-02-11T07:06:53.724634803-06:00",
+	"paths": [
+		"claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "617ad5cae7ec8add136f9fdc0a0abffdb51f894d7a5cc4cf17962da9cd35b93a",
+					"line": 101,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/vpc/wordpress-flow-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[flow_log]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "f2b7b1d5b1f1e9acdb970f287aaaed6e00f877aeda4db4e43defdee037b6e7d2",
+					"line": 201,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-alb-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{alb}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{alb}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{alb}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "471993a1327d951fb30532f482a8e47d054aa7c8939b1157ea93ad05816d4bb6",
+					"line": 206,
+					"resource_type": "aws_shield_protection",
+					"resource_name": "wordpress-cloudfront-shield",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_shield_protection[{{cloudfront}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_shield_protection[{{cloudfront}}].tags should be defined and not null",
+					"actual_value": "aws_shield_protection[{{cloudfront}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "1939deade5759f794e350f0f1eb31debb5e640841ac9673fa0313dbd962df503",
+					"line": 212,
+					"resource_type": "aws_wafv2_web_acl",
+					"resource_name": "wordpress-web-acl",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_wafv2_web_acl[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_wafv2_web_acl[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_wafv2_web_acl[{{main}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "1ebbb50958ae443f5dd80f0b77fcdf5c2d8ad674d1fab49b3669eadeb8e822f2",
+					"line": 94,
+					"resource_type": "aws_flow_log",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_flow_log[{{main}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_flow_log[{{main}}].tags should be defined and not null",
+					"actual_value": "aws_flow_log[{{main}}].tags is undefined or null"
+				},
+				{
+					"file_name": "claude-3-5-sonnet-20241022_0.7_aws-refarch-wordpress_2025-01-01_19-11-13.tf.rescanned.tf",
+					"similarity_id": "5fa22df56cb7e800759f79a3e73659345fa12c7a67006fa657926d3ec6fb9204",
+					"line": 111,
+					"resource_type": "aws_iam_role",
+					"resource_name": "wordpress-flow-log-role",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_iam_role[{{flow_log}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_iam_role[{{flow_log}}].tags should be defined and not null",
+					"actual_value": "aws_iam_role[{{flow_log}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}

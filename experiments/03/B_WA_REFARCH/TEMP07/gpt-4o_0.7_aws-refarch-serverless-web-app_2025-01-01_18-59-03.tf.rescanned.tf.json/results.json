@@ -1,0 +1,285 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 381,
+	"files_parsed": 1,
+	"lines_parsed": 381,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 1,
+		"LOW": 2,
+		"MEDIUM": 6,
+		"TRACE": 0
+	},
+	"total_counter": 9,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:40:00.570551358-06:00",
+	"end": "2025-02-03T21:40:10.845179531-06:00",
+	"paths": [
+		"gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "91e1cc2a4e4852dea2b5f92ff12a7eaee20b9fab369ee7bdbf81041c58b12f7c",
+					"line": 119,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-app-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[this]'s corresponding aws_api_gateway_method_settings should be defined and not null",
+					"actual_value": "aws_api_gateway_stage[this]'s corresponding aws_api_gateway_method_settings isn't defined or is null"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway With CloudWatch Logging Disabled",
+			"query_id": "982aa526-6970-4c59-8b9b-2ce7e019fe36",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#managing-the-api-logging-cloudwatch-log-group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Logs for APIs should be enabled and using the naming convention described in documentation",
+			"description_id": "48b9d186",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "3868683811eb2a5b6f0fee5a70b5644cffcbfb7663f5977534dd9e52d7904a0d",
+					"line": 119,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-app-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_cloudwatch_log_group' should be defined and use the correct naming convention",
+					"actual_value": "'aws_cloudwatch_log_group' for the stage is not undefined or not using the correct naming convention"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Without Configured Authorizer",
+			"query_id": "0a96ce49-4163-4ee6-8169-eb3b0797d694",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_authorizer",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "API Gateway REST API should have an API Gateway Authorizer",
+			"description_id": "c1eed330",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "944593df7dfc54413c12fd5a19482950ae87b5b497b9349e590c3cbe50621b48",
+					"line": 102,
+					"resource_type": "aws_api_gateway_rest_api",
+					"resource_name": "my-app-api",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_rest_api[this]",
+					"search_line": 102,
+					"search_value": "",
+					"expected_value": "API Gateway REST API should be associated with an API Gateway Authorizer",
+					"actual_value": "API Gateway REST API is not associated with an API Gateway Authorizer"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Without SSL Certificate",
+			"query_id": "0b4869fc-a842-4597-aa00-1294df425440",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#client_certificate_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "295",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "SSL Client Certificate should be enabled",
+			"description_id": "6d4941dc",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "b88744894ddaa800a6e975ae7a38d752082ea1a9d3c935a833214341e0acdfcf",
+					"line": 119,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-app-prod-stage",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_stage[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'client_certificate_id' should be set",
+					"actual_value": "Attribute 'client_certificate_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway without WAF",
+			"query_id": "a186e82c-1078-4a7b-85d8-579561fde884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafregional_web_acl_association#resource_arn",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "API Gateway should have WAF (Web Application Firewall) enabled",
+			"description_id": "bfefa118",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "7f74b2023b039ce014cc1f3cc9a2b1b76c119c4411e003e1db41c0ea4fc78399",
+					"line": 119,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-app-prod-stage",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[this]",
+					"search_line": 119,
+					"search_value": "",
+					"expected_value": "API Gateway Stage should be associated with a Web Application Firewall",
+					"actual_value": "API Gateway Stage is not associated with a Web Application Firewall"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "267a55d7c8495dec97293868944efb76e90b90f025692882bedce0fe9c5120db",
+					"line": 138,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/api-gateway/my-app",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gw_logs]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Stage Without API Gateway UsagePlan Associated",
+			"query_id": "c999cf62-0920-40f8-8dda-0caccd66ed7e",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Resource Management",
+			"experimental": false,
+			"description": "API Gateway Stage should have API Gateway UsagePlan defined and associated.",
+			"description_id": "72d08d94",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "a368cdf008662fdc0d8020989714009a96b776b35baf0b9e42e40a71a743c1e9",
+					"line": 119,
+					"resource_type": "aws_api_gateway_stage",
+					"resource_name": "my-app-prod-stage",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_stage[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_stage[this] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_stage[this] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "2af233994353e1d642d3d8bf36e54ee4befb1d7cc1dca1c328e1345bff188e26",
+					"line": 30,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-app-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[this] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[this] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Without Retention Period Specified",
+			"query_id": "ef0b316a-211e-42f1-888e-64efe172b755",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should have retention days specified",
+			"description_id": "64f08509",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-59-03.tf.rescanned.tf",
+					"similarity_id": "9e685b6bf59d0180b88e0f00ca9e7c654e113d3f1c3a95d6e5892779be192b8c",
+					"line": 138,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/api-gateway/my-app",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gw_logs]",
+					"search_line": 138,
+					"search_value": "",
+					"expected_value": "Attribute 'retention_in_days' should be set and valid",
+					"actual_value": "Attribute 'retention_in_days' is undefined",
+					"remediation": "retention_in_days = 7",
+					"remediation_type": "addition"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,223 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 514,
+	"files_parsed": 1,
+	"lines_parsed": 502,
+	"lines_ignored": 12,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 3,
+		"MEDIUM": 6,
+		"TRACE": 0
+	},
+	"total_counter": 9,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:48:39.568006393-06:00",
+	"end": "2025-02-03T21:48:49.900982873-06:00",
+	"paths": [
+		"Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Deployment Without Access Log Setting",
+			"query_id": "625abc0e-f980-4ac9-a775-f7519ee34296",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have access log setting defined when connected to an API Gateway Stage.",
+			"description_id": "e28c5797",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "be2685036b2a4498a97632730d00a91ba62ee3eba6c48d113c93f196a1dd159b",
+					"line": 176,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "this",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_api_gateway_deployment[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[this] has a 'aws_api_gateway_stage' resource associated",
+					"actual_value": "aws_api_gateway_deployment[this] doesn't have a 'aws_api_gateway_stage' resource associated"
+				}
+			]
+		},
+		{
+			"query_name": "Public Lambda via API Gateway",
+			"query_id": "3ef8696c-e4ae-4872-92c7-520bb44dfe77",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Access Control",
+			"experimental": false,
+			"description": "Allowing to run lambda function using public API Gateway",
+			"description_id": "1f20399a",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "cf9cd91b1a6c46f288110df5402d0e2d20a25e4448dc5a913f477f82bf30ef48",
+					"line": 299,
+					"resource_type": "aws_lambda_permission",
+					"resource_name": "my-app-add-item",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_lambda_permission[add_item].source_arn",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'source_arn' should not equal '/*/*'",
+					"actual_value": "'source_arn' is equal '/*/*'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "40aba99b92a08d599515e75bc729f9733afbb216339253fe0d59d1389be065c4",
+					"line": 307,
+					"resource_type": "aws_lambda_permission",
+					"resource_name": "my-app-get-item",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_lambda_permission[get_item].source_arn",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'source_arn' should not equal '/*/*'",
+					"actual_value": "'source_arn' is equal '/*/*'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "0fe20e99dc2a3eca2bc03f780057120f35389b137d65de50f799e972e611910c",
+					"line": 331,
+					"resource_type": "aws_lambda_permission",
+					"resource_name": "my-app-delete-item",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_lambda_permission[delete_item].source_arn",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'source_arn' should not equal '/*/*'",
+					"actual_value": "'source_arn' is equal '/*/*'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "990da45e61433c589ad46df3429eb1f59bbe616b1094c334ebdb39110d00b913",
+					"line": 315,
+					"resource_type": "aws_lambda_permission",
+					"resource_name": "my-app-get-all-items",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_lambda_permission[get_all_items].source_arn",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'source_arn' should not equal '/*/*'",
+					"actual_value": "'source_arn' is equal '/*/*'"
+				},
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "87bb14910cf3c4b515405758584e6bad52330bf83dc23909d0cfef5523a76e4b",
+					"line": 323,
+					"resource_type": "aws_lambda_permission",
+					"resource_name": "my-app-put-item",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_lambda_permission[put_item].source_arn",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'source_arn' should not equal '/*/*'",
+					"actual_value": "'source_arn' is equal '/*/*'"
+				}
+			]
+		},
+		{
+			"query_name": "API Gateway Deployment Without API Gateway UsagePlan Associated",
+			"query_id": "b3a59b8e-94a3-403e-b6e2-527abaf12034",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "285",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Deployment should have API Gateway UsagePlan defined and associated.",
+			"description_id": "a5480b6e",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "1e6b2f9ce3f1510f5f3b42e593274c6481e3b7a4fddd10a5e1e5d03346e01cb7",
+					"line": 176,
+					"resource_type": "aws_api_gateway_deployment",
+					"resource_name": "this",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_api_gateway_deployment[this]",
+					"search_line": 176,
+					"search_value": "",
+					"expected_value": "aws_api_gateway_deployment[this] has a 'aws_api_gateway_usage_plan' resource associated. ",
+					"actual_value": "aws_api_gateway_deployment[this] doesn't have a 'aws_api_gateway_usage_plan' resource associated."
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "2af233994353e1d642d3d8bf36e54ee4befb1d7cc1dca1c328e1345bff188e26",
+					"line": 31,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-app-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[this]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[this] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[this] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "Llama-3-3-70B-Instruct-oxqir_0.7_aws-refarch-serverless-web-app_2025-01-01_19-30-00.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 31,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		}
+	]
+}

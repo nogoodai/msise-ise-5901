@@ -1,0 +1,115 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 479,
+	"files_parsed": 1,
+	"lines_parsed": 479,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 2,
+		"TRACE": 0
+	},
+	"total_counter": 3,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:28:57.176136371-06:00",
+	"end": "2025-02-03T21:29:07.361265899-06:00",
+	"paths": [
+		"gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-31-59.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "API Gateway Access Logging Disabled",
+			"query_id": "1b6799eb-4a7a-4b04-9001-8cceb9999326",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "API Gateway Stage should have Access Logging Settings defined",
+			"description_id": "e03531bf",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-31-59.tf.rescanned.tf",
+					"similarity_id": "47a8f47a07ff54e47f3f710af8032984440cd96e250850dc2d1faf7b88d7e4d1",
+					"line": 125,
+					"resource_type": "aws_apigatewayv2_stage",
+					"resource_name": "prod",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_apigatewayv2_stage[api_stage]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_apigatewayv2_stage[api_stage].default_route_settings should be defined and not null",
+					"actual_value": "aws_apigatewayv2_stage[api_stage].default_route_settings isn't defined or is null"
+				}
+			]
+		},
+		{
+			"query_name": "CloudWatch Log Group Without KMS",
+			"query_id": "0afbcfe9-d341-4b92-a64c-7e6de0543879",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Encryption",
+			"experimental": false,
+			"description": "AWS CloudWatch Log groups should be encrypted using KMS",
+			"description_id": "4258abe6",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-31-59.tf.rescanned.tf",
+					"similarity_id": "0ab62b6761a49c0fc564cc8b77c54ccb6cb6518d26c64d063800c7084fced9f2",
+					"line": 153,
+					"resource_type": "aws_cloudwatch_log_group",
+					"resource_name": "/aws/apigateway/my-app-my-stack-api",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cloudwatch_log_group[api_gateway_log_group]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "Attribute 'kms_key_id' should be set",
+					"actual_value": "Attribute 'kms_key_id' is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-31-59.tf.rescanned.tf",
+					"similarity_id": "a6046e3e646dedfa57774cd2d371a06cd8752118d4316d5db622720dcf8b9959",
+					"line": 35,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "my-app-my-stack-user-pool",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[auth]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[auth] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[auth] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		}
+	]
+}

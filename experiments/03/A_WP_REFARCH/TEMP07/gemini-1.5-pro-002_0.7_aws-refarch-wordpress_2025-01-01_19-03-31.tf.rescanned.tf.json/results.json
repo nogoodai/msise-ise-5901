@@ -1,0 +1,188 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 167,
+	"files_parsed": 1,
+	"lines_parsed": 165,
+	"lines_ignored": 2,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 0,
+		"INFO": 0,
+		"LOW": 1,
+		"MEDIUM": 5,
+		"TRACE": 0
+	},
+	"total_counter": 6,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:18:59.791838005-06:00",
+	"end": "2025-02-03T21:19:10.036577325-06:00",
+	"paths": [
+		"gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "S3 Bucket Logging Disabled",
+			"query_id": "f861041c-8c9f-4156-acfc-5e6e524f5884",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "778",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Server Access Logging should be enabled on S3 Buckets so that all changes are logged and trackable",
+			"description_id": "fa5c7c72",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "697a83b35192c488b4205b9632fbdd4df7624742f6da769b4c1111fe75f7bddf",
+					"line": 58,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-project-flow-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[flow_logs_bucket]",
+					"search_line": 58,
+					"search_value": "",
+					"expected_value": "'logging' should be defined and not null",
+					"actual_value": "'logging' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "S3 Bucket Without Versioning",
+			"query_id": "568a4d22-3517-44a6-a7ad-6a7eed88722c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket#versioning",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Backup",
+			"experimental": false,
+			"description": "S3 bucket should have versioning enabled",
+			"description_id": "7614ce3b",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "db671085a9f5353d0c3a7dc17bb2057ca53fcbff1c5f1cddac71607fcec2fb62",
+					"line": 58,
+					"resource_type": "aws_s3_bucket",
+					"resource_name": "wordpress-project-flow-logs",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_s3_bucket[flow_logs_bucket]",
+					"search_line": 58,
+					"search_value": "",
+					"expected_value": "'versioning' should be true",
+					"actual_value": "'versioning' is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Subnet Assigns Public IP",
+			"query_id": "52f04a44-6bfa-4c41-b1d3-4ae99a2de05c",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet#map_public_ip_on_launch",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "732",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC Subnet should not assign public IP",
+			"description_id": "2b7ea60d",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "8cac64d4a387d88a7d9e84fdc6f3e2cd376e01b425a2ecc750aa6d176a4bee8e",
+					"line": 96,
+					"resource_type": "aws_subnet",
+					"resource_name": "wordpress-project-public-subnet-1",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_subnet[public_1].map_public_ip_on_launch",
+					"search_line": 96,
+					"search_value": "",
+					"expected_value": "aws_subnet[public_1].map_public_ip_on_launch should be set to false or undefined",
+					"actual_value": "aws_subnet[public_1].map_public_ip_on_launch is set to true",
+					"remediation": "{\"after\":\"false\",\"before\":\"true\"}",
+					"remediation_type": "replacement"
+				},
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "964e36bdb29c10040a40baf4bbae57e4b616a87a6782c7b5285c48127a0b0eba",
+					"line": 108,
+					"resource_type": "aws_subnet",
+					"resource_name": "wordpress-project-public-subnet-2",
+					"issue_type": "IncorrectValue",
+					"search_key": "aws_subnet[public_2].map_public_ip_on_launch",
+					"search_line": 108,
+					"search_value": "",
+					"expected_value": "aws_subnet[public_2].map_public_ip_on_launch should be set to false or undefined",
+					"actual_value": "aws_subnet[public_2].map_public_ip_on_launch is set to true",
+					"remediation": "{\"after\":\"false\",\"before\":\"true\"}",
+					"remediation_type": "replacement"
+				}
+			]
+		},
+		{
+			"query_name": "VPC Without Network Firewall",
+			"query_id": "fd632aaf-b8a1-424d-a4d1-0de22fd3247a",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/networkfirewall_firewall#vpc_id",
+			"severity": "MEDIUM",
+			"platform": "Terraform",
+			"cwe": "311",
+			"cloud_provider": "AWS",
+			"category": "Networking and Firewall",
+			"experimental": false,
+			"description": "VPC should have a Network Firewall associated",
+			"description_id": "2e7d55e6",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "4ba7e0b1da4a57d7606dc8e19836ff56adf9fe0ed8589b5f196520ea737690fb",
+					"line": 33,
+					"resource_type": "aws_vpc",
+					"resource_name": "main",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_vpc[main]",
+					"search_line": 33,
+					"search_value": "",
+					"expected_value": "aws_vpc[main] has an 'aws_networkfirewall_firewall' associated",
+					"actual_value": "aws_vpc[main] does not have an 'aws_networkfirewall_firewall' associated"
+				}
+			]
+		},
+		{
+			"query_name": "IAM Access Analyzer Not Enabled",
+			"query_id": "e592a0c5-5bdb-414c-9066-5dba7cdea370",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/accessanalyzer_analyzer",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "710",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "IAM Access Analyzer should be enabled and configured to continuously monitor resource permissions",
+			"description_id": "d03e85ae",
+			"files": [
+				{
+					"file_name": "gemini-1.5-pro-002_0.7_aws-refarch-wordpress_2025-01-01_19-03-31.tf.rescanned.tf",
+					"similarity_id": "aa346cd1642a83b40e221f96a43d88dbfacecdf1f8e5314c24145f8d35530197",
+					"line": 33,
+					"resource_type": "n/a",
+					"resource_name": "n/a",
+					"issue_type": "MissingAttribute",
+					"search_key": "resource",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "'aws_accessanalyzer_analyzer' should be set",
+					"actual_value": "'aws_accessanalyzer_analyzer' is undefined"
+				}
+			]
+		}
+	]
+}

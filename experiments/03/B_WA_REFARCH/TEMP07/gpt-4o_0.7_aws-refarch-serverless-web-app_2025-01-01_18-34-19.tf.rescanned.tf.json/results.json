@@ -1,0 +1,156 @@
+{
+	"kics_version": "development",
+	"files_scanned": 1,
+	"lines_scanned": 419,
+	"files_parsed": 1,
+	"lines_parsed": 419,
+	"lines_ignored": 0,
+	"files_failed_to_scan": 0,
+	"queries_total": 1088,
+	"queries_failed_to_execute": 0,
+	"queries_failed_to_compute_similarity_id": 0,
+	"scan_id": "console",
+	"severity_counters": {
+		"CRITICAL": 0,
+		"HIGH": 1,
+		"INFO": 2,
+		"LOW": 2,
+		"MEDIUM": 0,
+		"TRACE": 0
+	},
+	"total_counter": 5,
+	"total_bom_resources": 0,
+	"start": "2025-02-03T21:29:59.370831646-06:00",
+	"end": "2025-02-03T21:30:09.73927558-06:00",
+	"paths": [
+		"gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+		"/home/lj/kics/assets/queries/"
+	],
+	"queries": [
+		{
+			"query_name": "KMS Key With Vulnerable Policy",
+			"query_id": "7ebc9038-0bde-479a-acc4-6ed7b6758899",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key",
+			"severity": "HIGH",
+			"platform": "Terraform",
+			"cwe": "732",
+			"cloud_provider": "AWS",
+			"category": "Insecure Configurations",
+			"experimental": false,
+			"description": "Checks if the policy is vulnerable and needs updating.",
+			"description_id": "32b2985e",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+					"similarity_id": "91f4461d6800eee8d02268257c4cca6dac16afa57bd8701d810fa9b17909651b",
+					"line": 172,
+					"resource_type": "aws_kms_key",
+					"resource_name": "log_key",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_kms_key[log_key]",
+					"search_line": 172,
+					"search_value": "",
+					"expected_value": "aws_kms_key[log_key].policy should be defined and not null",
+					"actual_value": "aws_kms_key[log_key].policy is undefined or null"
+				}
+			]
+		},
+		{
+			"query_name": "CMK Rotation Disabled",
+			"query_id": "22fbfeac-7b5a-421a-8a27-7a2178bb910b",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#enable_key_rotation",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "326",
+			"cloud_provider": "AWS",
+			"category": "Observability",
+			"experimental": false,
+			"description": "Customer Master Keys (CMK) must have rotation enabled, which means the attribute 'enable_key_rotation' must be set to 'true' when the key is enabled.",
+			"description_id": "64cfa70f",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+					"similarity_id": "79ae043847ce7202db6167b90f5923b72e2345b5919ac24b18567b06e5db1bfc",
+					"line": 172,
+					"resource_type": "aws_kms_key",
+					"resource_name": "log_key",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_kms_key[log_key]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_kms_key[log_key].enable_key_rotation should be set to true",
+					"actual_value": "aws_kms_key[log_key].enable_key_rotation is undefined"
+				}
+			]
+		},
+		{
+			"query_name": "Cognito UserPool Without MFA",
+			"query_id": "ec28bf61-a474-4dbe-b414-6dd3a067d6f0",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_pool",
+			"severity": "LOW",
+			"platform": "Terraform",
+			"cwe": "284",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS Cognito UserPool should have MFA (Multi-Factor Authentication) defined to users",
+			"description_id": "17f77319",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+					"similarity_id": "89663f273f52f8740ab730e7e6c6258232c4c41ab7cd3d3713b46efbc401cfdb",
+					"line": 36,
+					"resource_type": "aws_cognito_user_pool",
+					"resource_name": "serverless-web-app-my-app",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_cognito_user_pool[user_pool]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_cognito_user_pool[user_pool] should have 'sms_configuration' or 'software_token_mfa_configuration' defined",
+					"actual_value": "aws_cognito_user_pool[user_pool] doesn't have 'sms_configuration' or 'software_token_mfa_configuration' defined"
+				}
+			]
+		},
+		{
+			"query_name": "Resource Not Using Tags",
+			"query_id": "e38a8e0a-b88b-4902-b3fe-b0fcb17d5c10",
+			"query_url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/resource-tagging",
+			"severity": "INFO",
+			"platform": "Terraform",
+			"cwe": "665",
+			"cloud_provider": "AWS",
+			"category": "Best Practices",
+			"experimental": false,
+			"description": "AWS services resource tags are an essential part of managing components. As a best practice, the field 'tags' should have additional tags defined other than 'Name'",
+			"description_id": "09db2d52",
+			"files": [
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+					"similarity_id": "45d1d7a8a56bff07ae3bc8af517f3e7ca78c6682d98514372332709d9af45742",
+					"line": 396,
+					"resource_type": "aws_accessanalyzer_analyzer",
+					"resource_name": "example",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_accessanalyzer_analyzer[{{example}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_accessanalyzer_analyzer[{{example}}].tags should be defined and not null",
+					"actual_value": "aws_accessanalyzer_analyzer[{{example}}].tags is undefined or null"
+				},
+				{
+					"file_name": "gpt-4o_0.7_aws-refarch-serverless-web-app_2025-01-01_18-34-19.tf.rescanned.tf",
+					"similarity_id": "a37d625852ac6555205a6e992c7dd7795a2475a41530a7b20fded7d35f65b3d0",
+					"line": 172,
+					"resource_type": "aws_kms_key",
+					"resource_name": "log_key",
+					"issue_type": "MissingAttribute",
+					"search_key": "aws_kms_key[{{log_key}}]",
+					"search_line": -1,
+					"search_value": "",
+					"expected_value": "aws_kms_key[{{log_key}}].tags should be defined and not null",
+					"actual_value": "aws_kms_key[{{log_key}}].tags is undefined or null"
+				}
+			]
+		}
+	]
+}
