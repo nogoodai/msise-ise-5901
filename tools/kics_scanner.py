@@ -9,15 +9,37 @@ import json
 
 
 def clean_input_file(input_file):
-    """Remove lines containing 'terraform_configuration' or three backticks
-    from the input file."""
-    with open(input_file, "r") as file:
-        lines = file.readlines()
-    with open(input_file, "w") as file:
-        for line in lines:
-            if "terraform_configuration" not in line and "```" not in line:
-                file.write(line)
+    """
+    Remove lines containing 'terraform_configuration' or triple backticks,
+    skip lines with 'Key security' or 'Based on the scan',
+    and stop reading after encountering two lines with triple backticks.
+    """
+    back_tick_count = 0
 
+    forbidden_substrings = [
+        "Key security",
+        "Based on the scan",
+        "terraform_configuration"
+    ]
+
+    with open(input_file, "r") as infile:
+        lines = infile.readlines()
+
+    with open(input_file, "w") as outfile:
+        for line in lines:
+            # If line has triple backticks, increment and possibly break
+            if "```" in line:
+                back_tick_count += 1
+                if back_tick_count == 2:
+                    break  # Stop processing file after second occurrence
+                continue  # Also skip writing this backtick line
+
+            # If the line contains any forbidden substring, skip it
+            if any(substring in line for substring in forbidden_substrings):
+                continue
+
+            # Otherwise, write the line to the output
+            outfile.write(line)
 
 def run_kics_scanner(input_file, queries_path):
     # Check if the input file exists
